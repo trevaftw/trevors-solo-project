@@ -18,9 +18,9 @@ function* cardSearchResults(action) {
     // now that the session has given us a user object
     // with an id and username set the client-side user object to let
     // the client-side code know the user is logged in
-    // yield put({ type: 'SEARCH_STORE', payload: response.data });
+    yield put({ type: 'CARD_SEARCH_REDUCER', payload: cardSearchResponse.data });
   } catch (error) {
-    console.log('User get request failed', error);
+    console.log('Card Search get request failed', error);
   }
 }
 

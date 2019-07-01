@@ -34,7 +34,7 @@ class AddCards extends Component {
         <button onClick={this.handleClick}>Search</button>
 
         <pre>
-          {/* {JSON.stringify(this.props, null, 2)} */}
+          {JSON.stringify(this.props, null, 2)}
         </pre>
       </div>
     );
