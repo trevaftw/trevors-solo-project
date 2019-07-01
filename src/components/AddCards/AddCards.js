@@ -14,7 +14,12 @@ class AddCards extends Component {
   }
 
   handleClick = () => {
-    console.log('this.state.cardName:', this.state.cardName)
+    const card = this.state.cardName
+    console.log('this.state.cardName:', card)
+    this.setState({
+      cardName: ''
+    })
+    this.props.dispatch({type: 'CARD_SEARCH_RESULTS', payload: card})
   }
 
   render() {
