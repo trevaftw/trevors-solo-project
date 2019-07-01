@@ -3,19 +3,23 @@ import {
   HashRouter as Router,
   Route,
   Redirect,
-  Switch,
+  Switch, //put switch around the routes will check all the routes for a match, then if not it will render the 404--see last route before </switch>
 } from 'react-router-dom';
 
 import {connect} from 'react-redux';
 
+//Components
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 
+//user has to be logged in to see the route
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 
+//Routes
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
+import AddCards from '../AddCards/AddCards';
 
 import './App.css';
 
@@ -54,6 +58,11 @@ class App extends Component {
               exact
               path="/info"
               component={InfoPage}
+            />
+            <ProtectedRoute
+              exact
+              path="/AddCards"
+              component={AddCards}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
