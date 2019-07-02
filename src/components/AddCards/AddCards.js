@@ -8,10 +8,7 @@ class AddCards extends Component {
   state = {
     cardName: '',
     image: mtgCardBack,
-    newEntry: {
-      scryfall_id: '',
-      number: ''
-    },
+    alt: 'The backside of a Magic: The Gathering Card'
   }
 
   handleChange = (event) => {
@@ -29,17 +26,18 @@ class AddCards extends Component {
     this.props.dispatch({ type: 'CARD_SEARCH_RESULTS', payload: card })
   }
 
-  handleImage = (newImage) => {
+  handleImage = (newImage, name, type_line, oracle_text) => {
     // console.log('mouse over')
     this.setState({
       ...this.state,
-      image: newImage
+      image: newImage,
+      alt: `Name:, ${name}, Type:, ${type_line}, Oracle text:, ${oracle_text}`
     })
     // console.log('this.state.image:', this.state.image)
   }
 
   handleNumber = (scryfall_id) => (event) => {
-    console.log('event.target.value:', event.target.value)
+    // console.log('event.target.value:', event.target.value)
     this.setState({
       ...this.state,
       [event.target.name]: 
@@ -89,29 +87,29 @@ class AddCards extends Component {
               {this.props.reduxState.cards.map(card => {
                 if (card.card_faces && card.card_faces[0] && card.card_faces[0].image_uris && card.prices.usd === null) {
                   return (
-                    <tr onMouseOver={() => this.handleImage(card.card_faces[0].image_uris.large)} key={card.id}>
+                    <tr onMouseOver={() => this.handleImage(card.card_faces[0].image_uris.large, card.card_faces[0].name, card.card_faces[0].type_line, card.card_faces[0].oracle_text)} key={card.id}>
                       <td>{card.name}</td>
                       <td className="centerColumn">{card.set_name}</td>
                       <td className="centerColumn">{card.prices.usd_foil}</td>
-                      <td className="centerColumn"><input type="number" name={card.id} onChange={this.handleNumber(`${card.id}`)(`${card.id}`)} /></td>
+                      <td className="centerColumn"><input type="number" name={card.id} onChange={this.handleNumber(`${card.id}`)} /></td>
                       <td className="centerColumn"><input type="checkbox" onClick={this.handleWatch} />Add</td>
                     </tr>
                   )
                 } else if (card.card_faces && card.card_faces[0] && card.card_faces[0].image_uris) {
                   return (
-                    <tr onMouseOver={() => this.handleImage(card.card_faces[0].image_uris.large)} key={card.id}>
+                    <tr onMouseOver={() => this.handleImage(card.card_faces[0].image_uris.large, card.card_faces[0].name, card.card_faces[0].type_line, card.card_faces[0].oracle_text)} key={card.id}>
                       <td>{card.name}</td>
                       <td className="centerColumn">{card.set_name}</td>
                       <td className="centerColumn">{card.prices.usd}</td>
                       <td className="centerColumn"><input type="number" name={card.id} onChange={this.handleNumber(`${card.id}`)} /></td>
-                      <td className="centerColumn"><input type="checkbox" o />Add</td>
+                      <td className="centerColumn"><input type="checkbox" />Add</td>
                     </tr>
                   )
                 } else if (card.prices.usd === null && card.prices.usd_foil === null) {
                   return null;
                 } else if (card.prices.usd === null) {
                   return (
-                    <tr onMouseOver={() => this.handleImage(card.image_uris.large)} key={card.id}>
+                    <tr onMouseOver={() => this.handleImage(card.image_uris.large, card.name, card.type_line, card.oracle_text)} key={card.id}>
                       <td>{card.name}</td>
                       <td className="centerColumn">{card.set_name}</td>
                       <td className="centerColumn">{card.prices.usd_foil}</td>
@@ -122,7 +120,7 @@ class AddCards extends Component {
 
                 } else {
                   return (
-                    <tr onMouseOver={() => this.handleImage(card.image_uris.large)} key={card.id}>
+                    <tr onMouseOver={() => this.handleImage(card.image_uris.large, card.name, card.type_line, card.oracle_text)} key={card.id}>
                       <td>{card.name}</td>
                       <td className="centerColumn">{card.set_name}</td>
                       <td className="centerColumn">{card.prices.usd}</td>
@@ -136,7 +134,7 @@ class AddCards extends Component {
               )
               }
             </tbody>
-          </table> <img className="cardImageResults" src={this.state.image} alt="highlighted selection" />
+          </table> <img className="cardImageResults" src={this.state.image} alt={this.state.alt} />
           <br />
           <pre>
             {JSON.stringify(this.props.reduxState.cards, null, 2)}
@@ -158,6 +156,8 @@ const mapReduxStateToProps = reduxState => ({
 // this allows us to use <App /> in index.js
 export default connect(mapReduxStateToProps)(AddCards);
 
+
+//'Name:', card.name, 'Type:', card.type_line, 'Oracle text:', card.oracle_text
 
 
 
