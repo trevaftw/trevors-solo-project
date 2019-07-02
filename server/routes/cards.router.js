@@ -7,7 +7,7 @@ const axios = require('axios');
 router.get('/search/:id', rejectUnauthenticated, (req, res) => {
     console.log('search hit')
     console.log('req.params.id:', req.params.id)
-    axios.get(`https://api.scryfall.com/cards/search?q=${req.params.id}`).then(response => {
+    axios.get(`https://api.scryfall.com/cards/search?unique=prints&q=${req.params.id}`).then(response => {
         console.log('response.data.data:', response.data.data)
         res.send(response.data.data)
     })
