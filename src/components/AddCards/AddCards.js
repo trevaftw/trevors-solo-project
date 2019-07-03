@@ -58,6 +58,10 @@ class AddCards extends Component {
     } else if (this.state.newCards.scryfall_id === event.target.value) {
       const newCardObject = this.state.newCards
       console.log('card to be added:', newCardObject)
+      this.setState({
+        newCards: null
+      })
+      event.target.value = 0
     } else {
       alert(`Please add the ${this.state.newCards.name} from ${this.state.newCards.card_set} first before adding other cards`)
     }
@@ -109,7 +113,7 @@ class AddCards extends Component {
                       <td>{card.name}</td>
                       <td className="centerColumn">{card.set_name}</td>
                       <td className="centerColumn">{card.prices.usd_foil}</td>
-                      <td className="centerColumn"><input type="number" min="0" name={card.name} title={card.set_name} onChange={this.handleNumber(`${card.id}`)} /></td>
+                      <td className="centerColumn"><input type="number" min="0" name={card.name} title={card.set_name} value={this.state && this.state.newCards && this.state.newCards.scryfall_id === card.id && this.state.newCards.number  || 0} onChange={this.handleNumber(`${card.id}`)} /></td>
                       <td className="centerColumn"><button onClick={this.handleAdd} value={card.id} >Add</button></td>
                     </tr>
                   )
@@ -119,7 +123,7 @@ class AddCards extends Component {
                       <td>{card.name}</td>
                       <td className="centerColumn">{card.set_name}</td>
                       <td className="centerColumn">{card.prices.usd}</td>
-                      <td className="centerColumn"><input type="number" min="0" name={card.name} title={card.set_name} onChange={this.handleNumber(`${card.id}`)} /></td>
+                      <td className="centerColumn"><input type="number" min="0" name={card.name} title={card.set_name} value={this.state && this.state.newCards && this.state.newCards.scryfall_id === card.id && this.state.newCards.number  || 0} onChange={this.handleNumber(`${card.id}`)} /></td>
                       <td className="centerColumn"><button onClick={this.handleAdd} value={card.id} >Add</button></td>
                     </tr>
                   )
@@ -131,7 +135,7 @@ class AddCards extends Component {
                       <td>{card.name}</td>
                       <td className="centerColumn">{card.set_name}</td>
                       <td className="centerColumn">{card.prices.usd_foil}</td>
-                      <td className="centerColumn"><input type="number" min="0" name={card.name} title={card.set_name} onChange={this.handleNumber(`${card.id}`)} /></td>
+                      <td className="centerColumn"><input type="number" min="0" name={card.name} title={card.set_name} value={this.state && this.state.newCards && this.state.newCards.scryfall_id === card.id && this.state.newCards.number  || 0} onChange={this.handleNumber(`${card.id}`)} /></td>
                       <td className="centerColumn"><button onClick={this.handleAdd} value={card.id} >Add</button></td>
                     </tr>
                   )
@@ -142,7 +146,7 @@ class AddCards extends Component {
                       <td>{card.name}</td>
                       <td className="centerColumn">{card.set_name}</td>
                       <td className="centerColumn">{card.prices.usd}</td>
-                      <td className="centerColumn"><input type="number" min="0" name={card.name} title={card.set_name} onChange={this.handleNumber(`${card.id}`)} /></td>
+                      <td className="centerColumn"><input type="number" min="0" name={card.name} title={card.set_name} value={this.state && this.state.newCards && this.state.newCards.scryfall_id === card.id && this.state.newCards.number  || 0} onChange={this.handleNumber(`${card.id}`)} /></td>
                       <td className="centerColumn"><button onClick={this.handleAdd} value={card.id} >Add</button></td>
                     </tr>
                   )
