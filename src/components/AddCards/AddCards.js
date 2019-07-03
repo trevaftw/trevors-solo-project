@@ -8,7 +8,8 @@ class AddCards extends Component {
   state = {
     cardName: '',
     image: mtgCardBack,
-    alt: 'The backside of a Magic: The Gathering Card'
+    alt: 'The backside of a Magic: The Gathering Card',
+    newCards: null
   }
 
   handleChange = (event) => {
@@ -38,12 +39,28 @@ class AddCards extends Component {
 
   handleNumber = (scryfall_id) => (event) => {
     // console.log('event.target.value:', event.target.value)
+    // console.log('event.target.title:', event.target.title)
     this.setState({
-      ...this.state,
-      [event.target.name]: 
-      {scryfall_id: scryfall_id, 
-      number: event.target.value}
+      newCards: {
+        name: event.target.name,
+        card_set: event.target.title,
+        scryfall_id: scryfall_id,
+        number: event.target.value,
+        user_id: this.props.reduxState.user.id,
+      }
     })
+  }
+
+  handleAdd = (event) => {
+    // console.log('event.target.value:', event.target.value)
+    if (this.state.newCards === null) {
+      alert('Please select a number')
+    } else if (this.state.newCards.scryfall_id === event.target.value) {
+      const newCardObject = this.state.newCards
+      console.log('card to be added:', newCardObject)
+    } else {
+      alert(`Please add the ${this.state.newCards.name} from ${this.state.newCards.card_set} first before adding other cards`)
+    }
   }
 
   render() {
@@ -58,6 +75,7 @@ class AddCards extends Component {
           <input placeholder="Type a card name" onChange={this.handleChange} value={this.state.cardName} />
           <button onClick={this.handleClick}>Search</button><br />
           <h2>Search Results:</h2>
+          <h3>Need to find a way to either use the add box or just track where number > 0</h3>
           <pre>
             {JSON.stringify(this.state, null, 2)}
           </pre>
@@ -84,15 +102,15 @@ class AddCards extends Component {
               </tr>
             </thead>
             <tbody>
-              {this.props.reduxState.cards.map(card => {
+              {this.props.reduxState.cards.map((card, i) => {
                 if (card.card_faces && card.card_faces[0] && card.card_faces[0].image_uris && card.prices.usd === null) {
                   return (
                     <tr onMouseOver={() => this.handleImage(card.card_faces[0].image_uris.large, card.card_faces[0].name, card.card_faces[0].type_line, card.card_faces[0].oracle_text)} key={card.id}>
                       <td>{card.name}</td>
                       <td className="centerColumn">{card.set_name}</td>
                       <td className="centerColumn">{card.prices.usd_foil}</td>
-                      <td className="centerColumn"><input type="number" name={card.id} onChange={this.handleNumber(`${card.id}`)} /></td>
-                      <td className="centerColumn"><input type="checkbox" onClick={this.handleWatch} />Add</td>
+                      <td className="centerColumn"><input type="number" min="0" name={card.name} title={card.set_name} onChange={this.handleNumber(`${card.id}`)} /></td>
+                      <td className="centerColumn"><button onClick={this.handleAdd} value={card.id} >Add</button></td>
                     </tr>
                   )
                 } else if (card.card_faces && card.card_faces[0] && card.card_faces[0].image_uris) {
@@ -101,8 +119,8 @@ class AddCards extends Component {
                       <td>{card.name}</td>
                       <td className="centerColumn">{card.set_name}</td>
                       <td className="centerColumn">{card.prices.usd}</td>
-                      <td className="centerColumn"><input type="number" name={card.id} onChange={this.handleNumber(`${card.id}`)} /></td>
-                      <td className="centerColumn"><input type="checkbox" />Add</td>
+                      <td className="centerColumn"><input type="number" min="0" name={card.name} title={card.set_name} onChange={this.handleNumber(`${card.id}`)} /></td>
+                      <td className="centerColumn"><button onClick={this.handleAdd} value={card.id} >Add</button></td>
                     </tr>
                   )
                 } else if (card.prices.usd === null && card.prices.usd_foil === null) {
@@ -113,8 +131,8 @@ class AddCards extends Component {
                       <td>{card.name}</td>
                       <td className="centerColumn">{card.set_name}</td>
                       <td className="centerColumn">{card.prices.usd_foil}</td>
-                      <td className="centerColumn"><input type="number" name={card.id} onChange={this.handleNumber(`${card.id}`)} /></td>
-                      <td className="centerColumn"><input type="checkbox" />Add</td>
+                      <td className="centerColumn"><input type="number" min="0" name={card.name} title={card.set_name} onChange={this.handleNumber(`${card.id}`)} /></td>
+                      <td className="centerColumn"><button onClick={this.handleAdd} value={card.id} >Add</button></td>
                     </tr>
                   )
 
@@ -124,8 +142,8 @@ class AddCards extends Component {
                       <td>{card.name}</td>
                       <td className="centerColumn">{card.set_name}</td>
                       <td className="centerColumn">{card.prices.usd}</td>
-                      <td className="centerColumn"><input type="number" name={card.id} onChange={this.handleNumber(`${card.id}`)} /></td>
-                      <td className="centerColumn"><input type="checkbox" />Add</td>
+                      <td className="centerColumn"><input type="number" min="0" name={card.name} title={card.set_name} onChange={this.handleNumber(`${card.id}`)} /></td>
+                      <td className="centerColumn"><button onClick={this.handleAdd} value={card.id} >Add</button></td>
                     </tr>
                   )
 
