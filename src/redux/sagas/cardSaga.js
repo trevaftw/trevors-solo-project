@@ -23,9 +23,21 @@ function* cardSearchResults(action) {
     console.log('Card Search get request failed', error);
   }
 }
+function* addToColletion(action){
+  try{
+    const config = {
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true,
+    };
+    console.log('action.payload:', action.payload)
+  }catch (error) {
+    console.log('Card Search get request failed', error);
+  }
+}
 
 function* cardSaga() {
   yield takeLatest('CARD_SEARCH_RESULTS', cardSearchResults);
+  yield takeLatest('ADD_TO_COLLECTION', addToColletion)
 }
 
 export default cardSaga;

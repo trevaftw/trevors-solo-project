@@ -62,6 +62,7 @@ class AddCards extends Component {
     } else if (this.state.newCards.scryfall_id === event.target.value) {
       const newCardObject = this.state.newCards
       console.log('card to be added:', newCardObject)
+      this.props.dispatch({ type: 'ADD_TO_COLLECTION', payload: newCardObject})
       this.setState({
         newCards: null
       })
