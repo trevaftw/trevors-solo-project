@@ -29,7 +29,8 @@ function* addToColletion(action){
       headers: { 'Content-Type': 'application/json' },
       withCredentials: true,
     };
-    console.log('action.payload:', action.payload)
+    console.log('action.payload:', action.payload);
+    const serial_id_response = yield axios.put('/api/cards/add', (config, action.payload))
   }catch (error) {
     console.log('Card Search get request failed', error);
   }

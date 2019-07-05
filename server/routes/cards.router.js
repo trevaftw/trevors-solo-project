@@ -18,4 +18,16 @@ router.post('/', (req, res) => {
 
 });
 
+router.put('/add', rejectUnauthenticated, (req, res) => {
+    console.log('api/cards/add hit')
+    console.log('req.body:', req.body)
+    // pool.query(`
+    // UPDATE "cards" SET "price"=$1, "image_uris"= WHERE "id"=$2
+    // // NEED TO ADD IMAGE URL//////////////
+    // RETURNING "serial_id";`, [req.body.price, req.body.scryfall_id]
+    // ).then( (response) => {
+    //     console.log('response:', response)
+    // })
+});
+
 module.exports = router;
