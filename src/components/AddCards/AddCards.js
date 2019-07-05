@@ -21,10 +21,14 @@ class AddCards extends Component {
   handleClick = () => {
     const card = this.state.cardName
     console.log('this.state.cardName:', card)
-    this.setState({
-      cardName: ''
-    })
-    this.props.dispatch({ type: 'CARD_SEARCH_RESULTS', payload: card })
+    if (card.length < 3) {
+      alert('Search must be at least 3 characters')
+    } else {
+      this.setState({
+        cardName: ''
+      })
+      this.props.dispatch({ type: 'CARD_SEARCH_RESULTS', payload: card })
+    }
   }
 
   handleImage = (newImage, name, type_line, oracle_text) => {
@@ -79,7 +83,8 @@ class AddCards extends Component {
           <input placeholder="Type a card name" onChange={this.handleChange} value={this.state.cardName} />
           <button onClick={this.handleClick}>Search</button><br />
           <h2>Search Results:</h2>
-          <h3>Need to find a way to either use the add box or just track where number > 0</h3>
+          {this.props.reduxState.cards.length >= 100 &&
+            <h3>Search returned over 100 results. Please narrow search.</h3>}
           <pre>
             {JSON.stringify(this.state, null, 2)}
           </pre>
@@ -128,7 +133,15 @@ class AddCards extends Component {
                     </tr>
                   )
                 } else if (card.prices.usd === null && card.prices.usd_foil === null) {
-                  return null;
+                  return (
+                    <tr onMouseOver={() => this.handleImage(card.image_uris.large, card.name, card.type_line, card.oracle_text)} key={card.id}>
+                      <td>{card.name}</td>
+                      <td className="centerColumn">{card.set_name}</td>
+                      <td className="centerColumn">{card.prices.usd}</td>
+                      <td className="centerColumn">Price unavailable</td>
+                      <td className="centerColumn">Unable to track</td>
+                    </tr>
+                  )
                 } else if (card.prices.usd === null) {
                   return (
                     <tr onMouseOver={() => this.handleImage(card.image_uris.large, card.name, card.type_line, card.oracle_text)} key={card.id}>
