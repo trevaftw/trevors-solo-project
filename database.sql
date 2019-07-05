@@ -112,15 +112,31 @@ ALTER TABLE "public"."cards"
   DROP COLUMN "related_uris"
 ;
 
-SELECT * FROM "cards" 
-ORDER BY "serial_id";
-
 CREATE TABLE "user_cards" (
     "id" SERIAL PRIMARY KEY,
     "user_id" INT REFERENCES "user",
     "cards_id" INT REFERENCES "cards",
     "number_owned" INT
 );
+
+DROP TABLE "user_cards";
+
+INSERT INTO "user_cards" (user_id, cards_id, number_owned)
+VALUES (1,2156,3)
+RETURNING "cards_id";
+
+
+
+SELECT "serial_id" FROM "cards"
+WHERE "id"='8bbcfb77-daa1-4ce5-b5f9-48d0a8edbba9';
+
+UPDATE "cards" SET "price"=2 WHERE "id"='8bbcfb77-daa1-4ce5-b5f9-48d0a8edbba9'
+RETURNING "serial_id";
+--so first updaste price, then return the serial id to link the user_cards table
+INSERT INTO "user_cards" (user_id, cards_id, number_owned)
+VALUES ($1, response, $2);
+
+
 
 
 SELECT * FROM "user"
