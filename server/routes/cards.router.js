@@ -14,20 +14,35 @@ router.get('/search/:id', rejectUnauthenticated, (req, res) => {
 });
 
 
-router.post('/', (req, res) => {
-
+router.post('/updateUserTable/:id', rejectUnauthenticated, (req, res) => {
+    // console.log('updateUserTable route hit')
+    console.log('updateUserTable req.body:', req.body);
+    console.log('updateUserTable req.params:', req.params.id);
+    pool.query(`
+    INSERT INTO "user_cards" (user_id, cards_id, number_owned)
+    VALUES ($1, $2, $3);`, [req.body.user_id, req.params.id, req.body.number]
+    ).then( () => {
+        res.sendStatus(200)
+    }).catch(error => {
+        console.log('error with updateUserTable:', error)
+        res.sendStatus(500)
+    })
+//need to do the pool query
 });
 
-router.put('/add', rejectUnauthenticated, (req, res) => {
-    console.log('api/cards/add hit')
-    console.log('req.body:', req.body)
-    // pool.query(`
-    // UPDATE "cards" SET "price"=$1, "image_uris"= WHERE "id"=$2
-    // // NEED TO ADD IMAGE URL//////////////
-    // RETURNING "serial_id";`, [req.body.price, req.body.scryfall_id]
-    // ).then( (response) => {
-    //     console.log('response:', response)
-    // })
+router.put('/updateCardDatabase', rejectUnauthenticated, (req, res) => {
+    console.log('api/cards/updateCardDatabase hit')
+    // console.log('put req.body:', req.body)
+    pool.query(`
+    UPDATE "cards" SET "price"=$1, "image_uris"=$3 WHERE "id"=$2
+    RETURNING "serial_id";`, [req.body.price, req.body.scryfall_id, req.body.image]
+    ).then( (response) => {
+        console.log('put router response:', response.rows[0].serial_id)
+        res.send(response.rows[0])
+    }).catch(error => {
+        console.log('error with updateCardDatabase:', error)
+        res.sendStatus(500)
+    })
 });
 
 module.exports = router;

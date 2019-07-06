@@ -44,6 +44,7 @@ class AddCards extends Component {
   handleNumber = (scryfall_id) => (event) => {
     // console.log('event.target.value:', event.target.value)
     // console.log('event.target.title:', event.target.title)
+    // console.log('event.target.lang:', event.target.lang)
     this.setState({
       newCards: {
         name: event.target.name,
@@ -51,7 +52,8 @@ class AddCards extends Component {
         scryfall_id: scryfall_id,
         number: event.target.value,
         user_id: this.props.reduxState.user.id,
-        price: event.target.id
+        price: event.target.id,
+        image: event.target.lang
       }
     })
   }
@@ -120,7 +122,7 @@ class AddCards extends Component {
                       <td>{card.name}</td>
                       <td className="centerColumn">{card.set_name}</td>
                       <td className="centerColumn">{card.prices.usd_foil}</td>
-                      <td className="centerColumn"><input type="number" min="0" name={card.name} title={card.set_name} id={card.prices.usd_foil} value={(this.state && this.state.newCards && this.state.newCards.scryfall_id === card.id && this.state.newCards.number) || 0} onChange={this.handleNumber(`${card.id}`)} /></td>
+                      <td className="centerColumn"><input type="number" min="0" lang={card.card_faces[0].image_uris.large} name={card.name} title={card.set_name} id={card.prices.usd_foil} value={(this.state && this.state.newCards && this.state.newCards.scryfall_id === card.id && this.state.newCards.number) || 0} onChange={this.handleNumber(`${card.id}`)} /></td>
                       <td className="centerColumn"><button onClick={this.handleAdd} value={card.id} >Add</button></td>
                     </tr>
                   )
@@ -130,7 +132,7 @@ class AddCards extends Component {
                       <td>{card.name}</td>
                       <td className="centerColumn">{card.set_name}</td>
                       <td className="centerColumn">{card.prices.usd}</td>
-                      <td className="centerColumn"><input type="number" min="0" name={card.name} id={card.prices.usd} title={card.set_name} value={(this.state && this.state.newCards && this.state.newCards.scryfall_id === card.id && this.state.newCards.number) || 0} onChange={this.handleNumber(`${card.id}`)} /></td>
+                      <td className="centerColumn"><input type="number" min="0" lang={card.card_faces[0].image_uris.large} name={card.name} id={card.prices.usd} title={card.set_name} value={(this.state && this.state.newCards && this.state.newCards.scryfall_id === card.id && this.state.newCards.number) || 0} onChange={this.handleNumber(`${card.id}`)} /></td>
                       <td className="centerColumn"><button onClick={this.handleAdd} value={card.id} >Add</button></td>
                     </tr>
                   )
@@ -150,7 +152,7 @@ class AddCards extends Component {
                       <td>{card.name}</td>
                       <td className="centerColumn">{card.set_name}</td>
                       <td className="centerColumn">{card.prices.usd_foil}</td>
-                      <td className="centerColumn"><input type="number" min="0" name={card.name} id={card.prices.usd_foil} title={card.set_name} value={(this.state && this.state.newCards && this.state.newCards.scryfall_id === card.id && this.state.newCards.number) || 0} onChange={this.handleNumber(`${card.id}`)} /></td>
+                      <td className="centerColumn"><input type="number" min="0" lang={card.image_uris.large} name={card.name} id={card.prices.usd_foil} title={card.set_name} value={(this.state && this.state.newCards && this.state.newCards.scryfall_id === card.id && this.state.newCards.number) || 0} onChange={this.handleNumber(`${card.id}`)} /></td>
                       <td className="centerColumn"><button onClick={this.handleAdd} value={card.id} >Add</button></td>
                     </tr>
                   )
@@ -161,7 +163,7 @@ class AddCards extends Component {
                       <td>{card.name}</td>
                       <td className="centerColumn">{card.set_name}</td>
                       <td className="centerColumn">{card.prices.usd}</td>
-                      <td className="centerColumn"><input type="number" min="0" name={card.name} id={card.prices.usd} title={card.set_name} value={(this.state && this.state.newCards && this.state.newCards.scryfall_id === card.id && this.state.newCards.number) || 0} onChange={this.handleNumber(`${card.id}`)} /></td>
+                      <td className="centerColumn"><input type="number" min="0" lang={card.image_uris.large} name={card.name} id={card.prices.usd} title={card.set_name} value={(this.state && this.state.newCards && this.state.newCards.scryfall_id === card.id && this.state.newCards.number) || 0} onChange={this.handleNumber(`${card.id}`)} /></td>
                       <td className="centerColumn"><button onClick={this.handleAdd} value={card.id} >Add</button></td>
                     </tr>
                   )

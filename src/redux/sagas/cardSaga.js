@@ -23,17 +23,36 @@ function* cardSearchResults(action) {
     console.log('Card Search get request failed', error);
   }
 }
-function* addToColletion(action){
-  try{
+function* addToColletion(action) {
+  try {
     const config = {
       headers: { 'Content-Type': 'application/json' },
       withCredentials: true,
     };
     console.log('action.payload:', action.payload);
-    const serial_id_response = yield axios.put('/api/cards/add', (config, action.payload))
-  }catch (error) {
+    const response = yield axios.put('/api/cards/updateCardDatabase', (config, action.payload))
+    console.log('saga response.data.serial_id:', response.data.serial_id)
+    yield axios.post(`/api/cards/updateUserTable/${response.data.serial_id}`, (config, action.payload) );
+    // (response.data.serial_id, action.payload), config,  
+  } catch (error) {
     console.log('Card Search get request failed', error);
   }
+}
+
+function* updateUserTable(action){
+  try {
+    const config = {
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true,
+    };
+    console.log('action.payload:', action.payload);
+    const serial_id_response = yield axios.put('/api/cards/updateCardDatabase', (config, action.payload))
+    yield axios.post('/api/cards/updateUserTable', config);
+    // , (action.payload, serial_id_response),
+  } catch (error) {
+    console.log('Card Search get request failed', error);
+  }
+
 }
 
 function* cardSaga() {
