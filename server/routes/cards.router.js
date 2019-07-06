@@ -21,13 +21,13 @@ router.post('/updateUserTable/:id', rejectUnauthenticated, (req, res) => {
     pool.query(`
     INSERT INTO "user_cards" (user_id, cards_id, number_owned)
     VALUES ($1, $2, $3);`, [req.body.user_id, req.params.id, req.body.number]
-    ).then( () => {
+    ).then(() => {
         res.sendStatus(200)
     }).catch(error => {
         console.log('error with updateUserTable:', error)
         res.sendStatus(500)
     })
-//need to do the pool query
+    //need to do the pool query
 });
 
 router.put('/updateCardDatabase', rejectUnauthenticated, (req, res) => {
@@ -36,7 +36,7 @@ router.put('/updateCardDatabase', rejectUnauthenticated, (req, res) => {
     pool.query(`
     UPDATE "cards" SET "price"=$1, "image_uris"=$3 WHERE "id"=$2
     RETURNING "serial_id";`, [req.body.price, req.body.scryfall_id, req.body.image]
-    ).then( (response) => {
+    ).then((response) => {
         console.log('put router response:', response.rows[0].serial_id)
         res.send(response.rows[0])
     }).catch(error => {
@@ -44,5 +44,21 @@ router.put('/updateCardDatabase', rejectUnauthenticated, (req, res) => {
         res.sendStatus(500)
     })
 });
+
+router.get('/getUserCards/:id', rejectUnauthenticated, (req, res) => {
+    console.log('/getUserCards/:id hit. req.params.id:', req.params.id);
+    pool.query(`
+    SELECT * FROM "user_cards" 
+    JOIN "cards" on "cards"."serial_id"="user_cards"."cards_id"
+    WHERE "user_cards"."user_id"=$1
+    ORDER BY "cards"."name";`, [req.params.id]
+    ).then((response) => {
+        console.log('/getUserCards/:id response.rows:', response.rows)
+        res.send(response.rows)
+    }).catch(error => {
+        console.log('error with getUserCards/:id:', error)
+        res.sendStatus(500)
+    })
+})
 
 module.exports = router;

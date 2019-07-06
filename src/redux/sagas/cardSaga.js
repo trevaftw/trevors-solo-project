@@ -39,25 +39,26 @@ function* addToColletion(action) {
   }
 }
 
-function* updateUserTable(action){
-  try {
+function* userOwnedCards(action){
+  try{
     const config = {
       headers: { 'Content-Type': 'application/json' },
       withCredentials: true,
     };
-    console.log('action.payload:', action.payload);
-    const serial_id_response = yield axios.put('/api/cards/updateCardDatabase', (config, action.payload))
-    yield axios.post('/api/cards/updateUserTable', config);
-    // , (action.payload, serial_id_response),
-  } catch (error) {
-    console.log('Card Search get request failed', error);
+    // console.log('USER_OWNED_CARDS saga hit')
+    // console.log('action.payload:', action.payload)
+    const response = yield axios.get(`api/cards/getUserCards/${action.payload}`, config);
+    console.log('axios userownedcards get response:', response.data);
+    yield put({type:'SINGLE_USER_REDUCER', payload: response.data})
+  }catch (error) {
+    console.log('USER_OWNED_CARDS saga error', error);
   }
-
 }
 
 function* cardSaga() {
   yield takeLatest('CARD_SEARCH_RESULTS', cardSearchResults);
-  yield takeLatest('ADD_TO_COLLECTION', addToColletion)
+  yield takeLatest('ADD_TO_COLLECTION', addToColletion);
+  yield takeLatest('USER_OWNED_CARDS', userOwnedCards);
 }
 
 export default cardSaga;

@@ -65,7 +65,7 @@ class AddCards extends Component {
     } else if (this.state.newCards.scryfall_id === event.target.value) {
       const newCardObject = this.state.newCards
       console.log('card to be added:', newCardObject)
-      this.props.dispatch({ type: 'ADD_TO_COLLECTION', payload: newCardObject})
+      this.props.dispatch({ type: 'ADD_TO_COLLECTION', payload: newCardObject })
       this.setState({
         newCards: null
       })
@@ -99,23 +99,23 @@ class AddCards extends Component {
               <tr>
                 <th>
                   Card Name
-              </th>
+                </th>
                 <th>
                   Card Set
-              </th>
+                </th>
                 <th>
                   Price Per Card
-              </th>
+                </th>
                 <th>
                   Number?
-              </th>
+                </th>
                 <th>
                   Add to collection?
               </th>
               </tr>
             </thead>
             <tbody>
-              {this.props.reduxState.cards.map((card, i) => {
+              {this.props.reduxState.cards.cards.map((card) => {
                 if (card.card_faces && card.card_faces[0] && card.card_faces[0].image_uris && card.prices.usd === null) {
                   return (
                     <tr onMouseOver={() => this.handleImage(card.card_faces[0].image_uris.large, card.card_faces[0].name, card.card_faces[0].type_line, card.card_faces[0].oracle_text)} key={card.id}>
