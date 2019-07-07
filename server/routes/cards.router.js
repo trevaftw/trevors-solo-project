@@ -54,9 +54,26 @@ router.get('/getUserCards/:id', rejectUnauthenticated, (req, res) => {
     ORDER BY "cards"."name";`, [req.params.id]
     ).then((response) => {
         console.log('/getUserCards/:id response.rows:', response.rows)
+        console.log('req.user:', req.user)
         res.send(response.rows)
     }).catch(error => {
         console.log('error with getUserCards/:id:', error)
+        res.sendStatus(500)
+    })
+})
+
+router.delete('/delete/:id', rejectUnauthenticated, (req, res) => {
+    console.log('delete/:id route hit')
+    console.log('req.user:', req.user.id)
+    console.log('req.params.id', req.params.id)
+    pool.query(`
+    DELETE FROM "user_cards"
+    WHERE "user_id"=$1 AND "cards_id"=$2
+    RETURNING *;`, [req.user.id, req.params.id]
+    ).then (response => {
+        res.send(response.rows)
+    }).catch(error => {
+        console.log('error with delete/:id:', error)
         res.sendStatus(500)
     })
 })

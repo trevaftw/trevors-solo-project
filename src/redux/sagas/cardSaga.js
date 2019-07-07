@@ -55,10 +55,26 @@ function* userOwnedCards(action){
   }
 }
 
+function* deleteCard(action){
+  try{
+    const config = {
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true,
+    }
+    console.log('delete card saga hit. actino.payload:', action.payload)
+    const response = yield axios.delete(`/api/cards/delete/${action.payload}`, config)
+    console.log('response', response.data[0].user_id)
+    yield put({type: 'USER_OWNED_CARDS', payload: response.data[0].user_id})
+  }catch (error) {
+    console.log('DELETE_CARD saga error', error);
+  }
+}
+
 function* cardSaga() {
   yield takeLatest('CARD_SEARCH_RESULTS', cardSearchResults);
   yield takeLatest('ADD_TO_COLLECTION', addToColletion);
   yield takeLatest('USER_OWNED_CARDS', userOwnedCards);
+  yield takeLatest('DELETE_CARD', deleteCard)
 }
 
 export default cardSaga;

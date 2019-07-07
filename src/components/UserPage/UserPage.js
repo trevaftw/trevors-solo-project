@@ -16,8 +16,13 @@ class UserPage extends Component {
     this.props.dispatch({type: 'USER_OWNED_CARDS', payload: this.props.state.user.id})
   }
 
-  handleDelete = () => {
-    console.log('deleted')
+  handleDelete = (event) => {
+    console.log('event.target.value',event.target.value)
+    // console.log('event.target.id', event.target.id)
+    const confirmBox = window.confirm('Click to OK to delete. Click Cancel to keep watching the card');
+    if (confirmBox===true){ 
+    this.props.dispatch({type:'DELETE_CARD', payload: event.target.value })
+    }
   }
 
   render() {
@@ -57,7 +62,7 @@ class UserPage extends Component {
                     <td>{card.set_name}</td>
                     <td>{card.price}</td>
                     <td>{card.number_owned}</td>
-                    <td><button onClick={this.handleDelete}>Delete</button></td>
+                    <td><button value={card.serial_id} onClick={this.handleDelete}>Delete</button></td>
                   </tr>
                 )
               })}
