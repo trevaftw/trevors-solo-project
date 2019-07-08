@@ -13,6 +13,24 @@ router.get('/search/:id', rejectUnauthenticated, (req, res) => {
     })
 });
 
+router.get('/getSingle/:id', rejectUnauthenticated, (req, res) => {
+    console.log('getSingle search hit')
+    console.log('req.params.id:', req.params.id)
+    console.log('req.user:', req.user)
+    pool.query(`
+    SELECT * FROM "user_cards" 
+    JOIN "cards" on "cards"."serial_id"="user_cards"."cards_id"
+    WHERE "user_cards"."user_id"=$1 AND "cards"."id"=$2
+    ORDER BY "cards"."name";`, [req.user.id, req.params.id]
+    ).then((response) => {
+        console.log('/getUserCards/:id response.rows[0]:', response.rows[0])
+        res.send(response.rows[0])
+    }).catch(error => {
+        console.log('error with getUserCards/:id:', error)
+        res.sendStatus(500)
+    })
+});
+
 
 router.post('/updateUserTable/:id', rejectUnauthenticated, (req, res) => {
     // console.log('updateUserTable route hit')
@@ -45,6 +63,23 @@ router.put('/updateCardDatabase', rejectUnauthenticated, (req, res) => {
     })
 });
 
+router.put('/updateSingleCard/:id', rejectUnauthenticated, (req, res) => {
+    console.log('updateSingleCard hit')
+    console.log('/updateSingleCard req.body:', req.body)
+    console.log('/updateSingleCard/:id', req.params.id)
+    pool.query(`
+    UPDATE "user_cards" SET "number_owned"="number_owned"+$1, WHERE "cards_id"=$2;`, 
+    [Number(req.body.number), req.params.id]
+    ).then(() => {
+        res.sendStatus(200)
+    }).catch(error => {
+        console.log('error with updateCardDatabase:', error)
+        res.sendStatus(500)
+    })
+});
+
+
+
 router.get('/getUserCards/:id', rejectUnauthenticated, (req, res) => {
     console.log('/getUserCards/:id hit. req.params.id:', req.params.id);
     pool.query(`
@@ -70,7 +105,7 @@ router.delete('/delete/:id', rejectUnauthenticated, (req, res) => {
     DELETE FROM "user_cards"
     WHERE "user_id"=$1 AND "cards_id"=$2
     RETURNING *;`, [req.user.id, req.params.id]
-    ).then (response => {
+    ).then(response => {
         res.send(response.rows)
     }).catch(error => {
         console.log('error with delete/:id:', error)

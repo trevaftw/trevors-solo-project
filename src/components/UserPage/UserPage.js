@@ -13,15 +13,15 @@ class UserPage extends Component {
   }
 
   handleFetchCards = () => {
-    this.props.dispatch({type: 'USER_OWNED_CARDS', payload: this.props.state.user.id})
+    this.props.dispatch({ type: 'USER_OWNED_CARDS', payload: this.props.state.user.id })
   }
 
   handleDelete = (event) => {
-    console.log('event.target.value',event.target.value)
+    console.log('event.target.value', event.target.value)
     // console.log('event.target.id', event.target.id)
     const confirmBox = window.confirm('Click to OK to delete. Click Cancel to keep watching the card');
-    if (confirmBox===true){ 
-    this.props.dispatch({type:'DELETE_CARD', payload: event.target.value })
+    if (confirmBox === true) {
+      this.props.dispatch({ type: 'DELETE_CARD', payload: event.target.value })
     }
   }
 
@@ -56,7 +56,7 @@ class UserPage extends Component {
             </thead>
             <tbody>
               {this.props.state.cards.userCards.map(card => {
-                return(
+                return (
                   <tr key={card.serial_id}>
                     <td>{card.name}</td>
                     <td>{card.set_name}</td>
@@ -71,9 +71,9 @@ class UserPage extends Component {
           <LogOutButton className="log-in" />
         </div>
         <div>
-          <pre>
+          {/* <pre>
             {JSON.stringify(this.props.state.cards.userCards, null, 2)}
-          </pre>
+          </pre> */}
         </div>
       </>
     );

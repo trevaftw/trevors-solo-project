@@ -89,9 +89,11 @@ class AddCards extends Component {
           <h2>Search Results:</h2>
           {this.props.reduxState.cards.length >= 100 &&
             <h3>Search returned over 100 results. Please narrow search.</h3>}
-          <pre>
+          {this.props.reduxState.cards === [] &&
+            <h3>Search returned over 0 results. Please check your spelling.</h3>}
+          {/* <pre>
             {JSON.stringify(this.state, null, 2)}
-          </pre>
+          </pre> */}
         </div>
         <div id="AddCardTable">
           <table>
@@ -175,9 +177,9 @@ class AddCards extends Component {
             </tbody>
           </table> <img className="cardImageResults" src={this.state.image} alt={this.state.alt} />
           <br />
-          <pre>
+          {/* <pre>
             {JSON.stringify(this.props.reduxState.cards, null, 2)}
-          </pre>
+          </pre> */}
         </div>
       </>
     );
