@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './AddCards.css';
+import SearchResult from '../SearchResult/SearchResult';
 
 const mtgCardBack = require('./Magic_the_gathering-card_back.jpg');
 
@@ -121,52 +122,28 @@ class AddCards extends Component {
                 if (card.card_faces && card.card_faces[0] && card.card_faces[0].image_uris && card.prices.usd === null) {
                   return (
                     <tr onMouseOver={() => this.handleImage(card.card_faces[0].image_uris.large, card.card_faces[0].name, card.card_faces[0].type_line, card.card_faces[0].oracle_text)} key={card.id}>
-                      <td>{card.name}</td>
-                      <td className="centerColumn">{card.set_name}</td>
-                      <td className="centerColumn">{card.prices.usd_foil}</td>
-                      <td className="centerColumn"><input type="number" min="0" lang={card.card_faces[0].image_uris.large} name={card.name} title={card.set_name} id={card.prices.usd_foil} value={(this.state && this.state.newCards && this.state.newCards.scryfall_id === card.id && this.state.newCards.number) || 0} onChange={this.handleNumber(`${card.id}`)} /></td>
-                      <td className="centerColumn"><button onClick={this.handleAdd} value={card.id} >Add</button></td>
+                      <SearchResult name={card.name} set={card.set_name} price={card.prices.usd_foil} image={card.card_faces[0].image_uris.large} id={card.id} />
                     </tr>
                   )
                 } else if (card.card_faces && card.card_faces[0] && card.card_faces[0].image_uris) {
                   return (
                     <tr onMouseOver={() => this.handleImage(card.card_faces[0].image_uris.large, card.card_faces[0].name, card.card_faces[0].type_line, card.card_faces[0].oracle_text)} key={card.id}>
-                      <td>{card.name}</td>
-                      <td className="centerColumn">{card.set_name}</td>
-                      <td className="centerColumn">{card.prices.usd}</td>
-                      <td className="centerColumn"><input type="number" min="0" lang={card.card_faces[0].image_uris.large} name={card.name} id={card.prices.usd} title={card.set_name} value={(this.state && this.state.newCards && this.state.newCards.scryfall_id === card.id && this.state.newCards.number) || 0} onChange={this.handleNumber(`${card.id}`)} /></td>
-                      <td className="centerColumn"><button onClick={this.handleAdd} value={card.id} >Add</button></td>
+                      <SearchResult name={card.name} set={card.set_name} price={card.prices.usd} image={card.card_faces[0].image_uris.large} id={card.id} />
                     </tr>
                   )
                 } else if (card.prices.usd === null && card.prices.usd_foil === null) {
-                  return (
-                    <tr onMouseOver={() => this.handleImage(card.image_uris.large, card.name, card.type_line, card.oracle_text)} key={card.id}>
-                      <td>{card.name}</td>
-                      <td className="centerColumn">{card.set_name}</td>
-                      <td className="centerColumn">{card.prices.usd}</td>
-                      <td className="centerColumn">Price unavailable</td>
-                      <td className="centerColumn">Unable to track</td>
-                    </tr>
-                  )
+                  return null
                 } else if (card.prices.usd === null) {
                   return (
                     <tr onMouseOver={() => this.handleImage(card.image_uris.large, card.name, card.type_line, card.oracle_text)} key={card.id}>
-                      <td>{card.name}</td>
-                      <td className="centerColumn">{card.set_name}</td>
-                      <td className="centerColumn">{card.prices.usd_foil}</td>
-                      <td className="centerColumn"><input type="number" min="0" lang={card.image_uris.large} name={card.name} id={card.prices.usd_foil} title={card.set_name} value={(this.state && this.state.newCards && this.state.newCards.scryfall_id === card.id && this.state.newCards.number) || 0} onChange={this.handleNumber(`${card.id}`)} /></td>
-                      <td className="centerColumn"><button onClick={this.handleAdd} value={card.id} >Add</button></td>
+                      <SearchResult name={card.name} set={card.set_name} price={card.prices.usd_foil} image={card.image_uris.large} id={card.id} />
                     </tr>
                   )
 
                 } else {
                   return (
                     <tr onMouseOver={() => this.handleImage(card.image_uris.large, card.name, card.type_line, card.oracle_text)} key={card.id}>
-                      <td>{card.name}</td>
-                      <td className="centerColumn">{card.set_name}</td>
-                      <td className="centerColumn">{card.prices.usd}</td>
-                      <td className="centerColumn"><input type="number" min="0" lang={card.image_uris.large} name={card.name} id={card.prices.usd} title={card.set_name} value={(this.state && this.state.newCards && this.state.newCards.scryfall_id === card.id && this.state.newCards.number) || 0} onChange={this.handleNumber(`${card.id}`)} /></td>
-                      <td className="centerColumn"><button onClick={this.handleAdd} value={card.id} >Add</button></td>
+                      <SearchResult name={card.name} set={card.set_name} price={card.prices.usd} image={card.image_uris.large} id={card.id} />
                     </tr>
                   )
 
