@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './AddCards.css';
 import SearchResult from '../SearchResult/SearchResult';
+import TableBody from '@material-ui/core/TableBody';
+import Table from '@material-ui/core/Table';
+import TableHead from '@material-ui/core/TableHead';
+import TableCell from '@material-ui/core/TableCell'
+import TableRow from '@material-ui/core/TableRow' 
+
 
 const mtgCardBack = require('./Magic_the_gathering-card_back.jpg');
 
@@ -92,62 +98,50 @@ class AddCards extends Component {
             {JSON.stringify(this.state, null, 2)}
           </pre> */}
         <div id="AddCardTable">
-          <table>
-            <thead>
-              <tr>
-                <th>
-                  Card Name
-                </th>
-                <th>
-                  Card Set
-                </th>
-                <th>
-                  Price Per Card
-                </th>
-                <th>
-                  Number?
-                </th>
-                <th>
-                  Add to collection?
-              </th>
-              </tr>
-            </thead>
-            <tbody>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Card Name</TableCell>
+                <TableCell>Price Per Card</TableCell>
+                <TableCell>Number?</TableCell>
+                <TableCell>Number to Add?</TableCell>
+                <TableCell></TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
               {this.props.reduxState.cards.cards.map((card) => {
                 if (card.card_faces && card.card_faces[0] && card.card_faces[0].image_uris && card.prices.usd === null) {
                   return (
-                    <tr onMouseOver={() => this.handleImage(card.card_faces[0].image_uris.large, card.card_faces[0].name, card.card_faces[0].type_line, card.card_faces[0].oracle_text)} key={card.id}>
+                    <TableRow onMouseOver={() => this.handleImage(card.card_faces[0].image_uris.large, card.card_faces[0].name, card.card_faces[0].type_line, card.card_faces[0].oracle_text)} key={card.id}>
                       <SearchResult name={card.name} set={card.set_name} price={card.prices.usd_foil} image={card.card_faces[0].image_uris.large} id={card.id} />
-                    </tr>
+                    </TableRow>
                   )
                 } else if (card.card_faces && card.card_faces[0] && card.card_faces[0].image_uris) {
                   return (
-                    <tr onMouseOver={() => this.handleImage(card.card_faces[0].image_uris.large, card.card_faces[0].name, card.card_faces[0].type_line, card.card_faces[0].oracle_text)} key={card.id}>
+                    <TableRow onMouseOver={() => this.handleImage(card.card_faces[0].image_uris.large, card.card_faces[0].name, card.card_faces[0].type_line, card.card_faces[0].oracle_text)} key={card.id}>
                       <SearchResult name={card.name} set={card.set_name} price={card.prices.usd} image={card.card_faces[0].image_uris.large} id={card.id} />
-                    </tr>
+                    </TableRow>
                   )
                 } else if (card.prices.usd === null && card.prices.usd_foil === null) {
                   return null
                 } else if (card.prices.usd === null) {
                   return (
-                    <tr onMouseOver={() => this.handleImage(card.image_uris.large, card.name, card.type_line, card.oracle_text)} key={card.id}>
+                    <TableRow onMouseOver={() => this.handleImage(card.image_uris.large, card.name, card.type_line, card.oracle_text)} key={card.id}>
                       <SearchResult name={card.name} set={card.set_name} price={card.prices.usd_foil} image={card.image_uris.large} id={card.id} />
-                    </tr>
+                    </TableRow>
                   )
-
                 } else {
                   return (
-                    <tr onMouseOver={() => this.handleImage(card.image_uris.large, card.name, card.type_line, card.oracle_text)} key={card.id}>
+                    <TableRow onMouseOver={() => this.handleImage(card.image_uris.large, card.name, card.type_line, card.oracle_text)} key={card.id}>
                       <SearchResult name={card.name} set={card.set_name} price={card.prices.usd} image={card.image_uris.large} id={card.id} />
-                    </tr>
+                    </TableRow>
                   )
-
                 }
               }
               )
               }
-            </tbody>
-          </table> <img className="cardImageResults" src={this.state.image} alt={this.state.alt} />
+            </TableBody>
+          </Table> <img className="cardImageResults" src={this.state.image} alt={this.state.alt} />
           <br />
           {/* <pre>
             {JSON.stringify(this.props.reduxState.cards, null, 2)}

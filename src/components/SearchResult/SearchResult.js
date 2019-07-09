@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import TableCell from '@material-ui/core/TableCell'
 
 class SearchResult extends Component {
 
@@ -57,11 +58,11 @@ class SearchResult extends Component {
     render() {
         return (
             <>
-                <td>{this.props.name}</td>
-                <td className="centerColumn">{this.props.set}</td>
-                <td className="centerColumn">{this.props.price}</td>
-                <td className="centerColumn"><input type="number" min="0" lang={this.props.image} name={this.props.name} id={this.props.price} title={this.props.set} value={(this.state && this.state.newCards && this.state.newCards.scryfall_id === this.props.id && this.state.newCards.number) || 0} onChange={this.handleNumber(`${this.props.id}`)} /></td>
-                <td className="centerColumn"><button onClick={this.handleAdd} value={this.props.id} >Add</button></td>
+                <TableCell>{this.props.name}</TableCell>
+                <TableCell className="centerColumn">{this.props.set}</TableCell>
+                <TableCell className="centerColumn">{this.props.price}</TableCell>
+                <TableCell className="centerColumn"><input type="number" min="0" lang={this.props.image} name={this.props.name} id={this.props.price} title={this.props.set} value={(this.state && this.state.newCards && this.state.newCards.scryfall_id === this.props.id && this.state.newCards.number) || 0} onChange={this.handleNumber(`${this.props.id}`)} /></TableCell>
+                <TableCell className="centerColumn"><button onClick={this.handleAdd} value={this.props.id} >Add</button></TableCell>
             </>
         );
     }
