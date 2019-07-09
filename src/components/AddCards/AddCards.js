@@ -79,23 +79,18 @@ class AddCards extends Component {
   render() {
     return (
       <>
-        <div id="AddCardHeader">
-          <h1 id="welcome">
-            Welcome, {this.props.reduxState.user.username}! Your id is {this.props.reduxState.user.id}!
-        </h1><br />
-          <br />
-          <label>Enter Card Name:</label><br />
-          <input placeholder="Type a card name" onChange={this.handleChange} value={this.state.cardName} />
-          <button onClick={this.handleClick}>Search</button><br />
-          <h2>Search Results:</h2>
-          {this.props.reduxState.cards.length >= 100 &&
-            <h3>Search returned over 100 results. Please narrow search.</h3>}
-          {this.props.reduxState.cards === [] &&
-            <h3>Search returned over 0 results. Please check your spelling.</h3>}
-          {/* <pre>
+        <h1>Card Search</h1>
+        <br />
+        <input placeholder="Type a card name" onChange={this.handleChange} value={this.state.cardName} />
+        <button onClick={this.handleClick}>Search</button><br />
+        <h2>Search Results:</h2>
+        {this.props.reduxState.cards.length >= 100 &&
+          <h3>Search returned over 100 results. Please narrow search.</h3>}
+        {this.props.reduxState.cards === [] &&
+          <h3>Search returned over 0 results. Please check your spelling.</h3>}
+        {/* <pre>
             {JSON.stringify(this.state, null, 2)}
           </pre> */}
-        </div>
         <div id="AddCardTable">
           <table>
             <thead>
