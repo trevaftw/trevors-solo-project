@@ -30,8 +30,8 @@ function* addToColletion(action) {
       withCredentials: true,
     };
     console.log('add To Collection action.payload:', action.payload);
-    const getResponse = yield axios.get(`api/cards/getSingle/${action.payload.scryfall_id}`, config)
-    console.log('getResponse:', getResponse.data)
+    // const getResponse = yield axios.get(`api/cards/getSingle/${action.payload.scryfall_id}`, config)
+    // console.log('getResponse:', getResponse.data)
     // yield (getResponse, action) => {
     //   if (getResponse && getResponse.data && getResponse.id && (getResponse.id === action.payload.scryfall_id)) {
     //     return axios.put('/api/cards/updateSingleCard', (config, action.payload))

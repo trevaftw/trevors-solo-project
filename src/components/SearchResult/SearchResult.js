@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 
 class SearchResult extends Component {
 
-    state = {}
+    state = {
+        newCards: null
+    }
 
     handleClick = () => {
         const card = this.state.cardName

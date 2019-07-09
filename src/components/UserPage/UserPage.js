@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import LogOutButton from '../LogOutButton/LogOutButton';
 
-// this could also be written with destructuring parameters as:
-// const UserPage = ({ user }) => (
-// and then instead of `props.user.username` you could use `user.username`
+const mtgCardBack = require('../AddCards/Magic_the_gathering-card_back.jpg');
+
 class UserPage extends Component {
+  state = {
+    cardName: '',
+    image: mtgCardBack,
+    alt: '',
+  }
 
   componentDidMount() {
     this.handleFetchCards();
@@ -23,6 +26,16 @@ class UserPage extends Component {
     if (confirmBox === true) {
       this.props.dispatch({ type: 'DELETE_CARD', payload: event.target.value })
     }
+  }
+
+  handleImage = (newImage, name) => {
+    // console.log('mouse over')
+    this.setState({
+      ...this.state,
+      image: newImage,
+      alt: `Name:, ${name}`
+    })
+    // console.log('this.state.image:', this.state.image)
   }
 
   render() {
@@ -57,7 +70,7 @@ class UserPage extends Component {
             <tbody>
               {this.props.state.cards.userCards.map(card => {
                 return (
-                  <tr key={card.serial_id}>
+                  <tr key={card.serial_id} onMouseOver={() => this.handleImage(card.image_uris, card.name)}>
                     <td>{card.name}</td>
                     <td>{card.set_name}</td>
                     <td>{card.price}</td>
@@ -68,12 +81,7 @@ class UserPage extends Component {
               })}
             </tbody>
           </table>
-          <LogOutButton className="log-in" />
-        </div>
-        <div>
-          {/* <pre>
-            {JSON.stringify(this.props.state.cards.userCards, null, 2)}
-          </pre> */}
+          <img className="cardImageResults" src={this.state.image} alt={this.state.alt} />
         </div>
       </>
     );
