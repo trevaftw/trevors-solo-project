@@ -106,8 +106,8 @@ class AddCards extends Component {
             <TableHead>
               <TableRow>
                 <TableCell>Card Name</TableCell>
+                <TableCell>Card Set</TableCell>
                 <TableCell>Price Per Card</TableCell>
-                <TableCell>Number?</TableCell>
                 <TableCell>Number to Add?</TableCell>
                 <TableCell></TableCell>
               </TableRow>
@@ -147,9 +147,9 @@ class AddCards extends Component {
             </TableBody>
           </Table> <img className="cardImageResults" src={this.state.image} alt={this.state.alt} />
           <br />
-          {/* <pre>
+          <pre>
             {JSON.stringify(this.props.reduxState.cards, null, 2)}
-          </pre> */}
+          </pre>
         </div>
       </>
     );

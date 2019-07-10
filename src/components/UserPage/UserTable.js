@@ -51,16 +51,16 @@ class UserTable extends Component {
     render() {
         return (
             <>
-                <TableCell>{this.props.name}</TableCell>
-                <TableCell>{this.props.set_name}</TableCell>
-                <TableCell>{this.props.price}</TableCell>
-                <TableCell>{this.state.editable ?
-                    <><input onChange={this.handleChange} placeholder={this.props.number_owned}></input><button value={this.props.serial_id} onClick={this.handleSave}>Save</button></>
+                <TableCell className="columWidth"  >{this.props.name}</TableCell>
+                <TableCell className="columWidth"  >{this.props.set_name}</TableCell>
+                <TableCell className="columWidth"  >{this.props.price}</TableCell>
+                <TableCell className="columWidth"  >{this.state.editable ?
+                    <><input type="number" onChange={this.handleChange} placeholder={this.props.number_owned}></input><button value={this.props.serial_id} onClick={this.handleSave}>Save</button></>
                     :
                     <>{this.props.number_owned} <button onClick={this.handleEdit}>Edit</button></>
                 }
                 </TableCell>
-                <TableCell><button value={this.props.serial_id} onClick={this.handleDelete}>Delete</button></TableCell>
+                <TableCell className="columWidth" ><button value={this.props.serial_id} onClick={this.handleDelete}>Delete</button></TableCell>
             </>
         )
     }
