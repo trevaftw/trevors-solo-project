@@ -82,11 +82,28 @@ function* deleteCard(action) {
   }
 }
 
+function* updateNumberOwned(action) {
+  try {
+    const config = {
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true,
+    }
+    console.log('UPDATE_NUMBER_OWNED SAGA HIT. action.payload:', action.payload)
+    const response = yield axios.put(`api/cards/updateNumberOwned/${action.payload.card_id}`, (config, action.payload));
+    console.log('updaqte number owned axios response:', response.data.user_id)
+    yield put({ type: 'USER_OWNED_CARDS', payload: response.data.user_id })
+
+  } catch (error) {
+    console.log('UPDATE_NUMBER_OWNED saga error', error);
+  }
+}
+
 function* cardSaga() {
   yield takeLatest('CARD_SEARCH_RESULTS', cardSearchResults);
   yield takeLatest('ADD_TO_COLLECTION', addToColletion);
   yield takeLatest('USER_OWNED_CARDS', userOwnedCards);
   yield takeLatest('DELETE_CARD', deleteCard)
+  yield takeLatest('UPDATE_NUMBER_OWNED', updateNumberOwned)
 }
 
 export default cardSaga;

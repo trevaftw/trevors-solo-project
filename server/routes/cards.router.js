@@ -63,23 +63,6 @@ router.put('/updateCardDatabase', rejectUnauthenticated, (req, res) => {
     })
 });
 
-// router.put('/updateSingleCard/:id', rejectUnauthenticated, (req, res) => {
-//     console.log('updateSingleCard hit')
-//     console.log('/updateSingleCard req.body:', req.body)
-//     console.log('/updateSingleCard/:id', req.params.id)
-//     pool.query(`
-//     UPDATE "user_cards" SET "number_owned"="number_owned"+$1, WHERE "cards_id"=$2;`, 
-//     [Number(req.body.number), req.params.id]
-//     ).then(() => {
-//         res.sendStatus(200)
-//     }).catch(error => {
-//         console.log('error with updateCardDatabase:', error)
-//         res.sendStatus(500)
-//     })
-// });
-
-
-
 router.get('/getUserCards/:id', rejectUnauthenticated, (req, res) => {
     console.log('/getUserCards/:id hit. req.params.id:', req.params.id);
     pool.query(`
@@ -113,4 +96,37 @@ router.delete('/delete/:id', rejectUnauthenticated, (req, res) => {
     })
 })
 
+router.put('/updateNumberOwned/:id', rejectUnauthenticated, (req, res) => {
+    console.log('updateNumberOwned/ hit')
+    console.log('req.paramds.id, req.user:', req.params.id, req.user.id, req.body.card_id)
+    pool.query(`
+    UPDATE "user_cards" 
+    SET "number_owned"=$1
+    WHERE "user_id"=$2 AND "cards_id"=$3
+    RETURNING "user_id";`, [req.body.newValue, req.user.id, req.body.card_id]
+    ).then((response) => {
+        console.log('updateNumberOwned/:idresponse:', response.rows[0].user_id)
+        res.send(response.rows[0])
+    }).catch(error => {
+        console.log('error with updateNumberOwned/:id:', error)
+        res.sendStatus(500)
+    })
+});
+
 module.exports = router;
+
+
+// router.put('/updateSingleCard/:id', rejectUnauthenticated, (req, res) => {
+//     console.log('updateSingleCard hit')
+//     console.log('/updateSingleCard req.body:', req.body)
+//     console.log('/updateSingleCard/:id', req.params.id)
+//     pool.query(`
+//     UPDATE "user_cards" SET "number_owned"="number_owned"+$1, WHERE "cards_id"=$2;`, 
+//     [Number(req.body.number), req.params.id]
+//     ).then(() => {
+//         res.sendStatus(200)
+//     }).catch(error => {
+//         console.log('error with updateCardDatabase:', error)
+//         res.sendStatus(500)
+//     })
+// });

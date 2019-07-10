@@ -18,12 +18,18 @@ class UserTable extends Component {
         })
     }
 
-    handleSave = () => {
+    handleSave = (event) => {
         console.log('save')
         this.setState({
             editable: !this.state.editable
         })
         console.log('this.state.newValue:', this.state.newValue)
+        console.log('event.target.value', event.target.value)
+        const newObject = {
+            card_id: event.target.value,
+            newValue: this.state.newValue
+        }
+        this.props.dispatch({type: 'UPDATE_NUMBER_OWNED', payload: newObject})
     }
 
     handleChange = (event) => {
@@ -49,7 +55,7 @@ class UserTable extends Component {
                 <TableCell>{this.props.set_name}</TableCell>
                 <TableCell>{this.props.price}</TableCell>
                 <TableCell>{this.state.editable ?
-                    <><input onChange={this.handleChange} placeholder={this.props.number_owned}></input><button onClick={this.handleSave}>Save</button></>
+                    <><input onChange={this.handleChange} placeholder={this.props.number_owned}></input><button value={this.props.serial_id} onClick={this.handleSave}>Save</button></>
                     :
                     <>{this.props.number_owned} <button onClick={this.handleEdit}>Edit</button></>
                 }

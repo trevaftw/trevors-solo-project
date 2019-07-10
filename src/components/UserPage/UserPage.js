@@ -30,14 +30,7 @@ class UserPage extends Component {
     this.handleSumValues();
   }
 
-  handleDelete = (event) => {
-    console.log('event.target.value', event.target.value)
-    // console.log('event.target.id', event.target.id)
-    const confirmBox = window.confirm('Click to OK to delete. Click Cancel to keep watching the card');
-    if (confirmBox === true) {
-      this.props.dispatch({ type: 'DELETE_CARD', payload: event.target.value })
-    }
-  }
+ 
 
   handleImage = (newImage, name) => {
     // console.log('mouse over')
