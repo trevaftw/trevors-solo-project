@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import './AddCards.css';
+
+//map results
 import SearchResult from '../SearchResult/SearchResult';
+
+//styling
+import './AddCards.css';
 import TableBody from '@material-ui/core/TableBody';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';

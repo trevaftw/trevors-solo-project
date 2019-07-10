@@ -1,6 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import UserTable from './UserTable';
+
+//styling
+import TableBody from '@material-ui/core/TableBody';
+import Table from '@material-ui/core/Table';
+import TableHead from '@material-ui/core/TableHead';
+import TableCell from '@material-ui/core/TableCell'
+import TableRow from '@material-ui/core/TableRow'
+
 const mtgCardBack = require('../AddCards/Magic_the_gathering-card_back.jpg');
 
 class UserPage extends Component {
@@ -8,6 +17,7 @@ class UserPage extends Component {
     cardName: '',
     image: mtgCardBack,
     alt: '',
+    totalValue: 0,
   }
 
   componentDidMount() {
@@ -16,7 +26,8 @@ class UserPage extends Component {
   }
 
   handleFetchCards = () => {
-    this.props.dispatch({ type: 'USER_OWNED_CARDS', payload: this.props.state.user.id })
+    this.props.dispatch({ type: 'USER_OWNED_CARDS', payload: this.props.state.user.id });
+    this.handleSumValues();
   }
 
   handleDelete = (event) => {
@@ -33,10 +44,24 @@ class UserPage extends Component {
     this.setState({
       ...this.state,
       image: newImage,
-      alt: `Name:, ${name}`
+      alt: `Name:, ${name}`,
     })
     // console.log('this.state.image:', this.state.image)
   }
+
+  handleSumValues = () => {
+    let newTotal;
+    this.props.state.cards.userCards.forEach(card => {
+      newTotal = Number(newTotal) + (Number(card.number_owned) * Number(card.price))
+      console.log('newTotal:', newTotal)
+      return Number(newTotal)
+    }
+    )
+    // return this.setState({ totalValue: newTotal })
+  }
+
+
+
 
   render() {
     return (
@@ -45,42 +70,42 @@ class UserPage extends Component {
           <h1 id="welcome">
             Welcome {this.props.state.user.username}!
           </h1>
-          <p>Your ID is: {this.props.state.user.id}</p>
+          <br />
           <h2>Your current collection:</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>
-                  Card Name
-              </th>
-                <th>
-                  Card Set
-              </th>
-                <th>
-                  Price Per Card
-              </th>
-                <th>
-                  Number
-              </th>
-                <th>
-                  Delete?
-              </th>
-              </tr>
-            </thead>
-            <tbody>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Card Name</TableCell>
+                <TableCell>Card Set</TableCell>
+                <TableCell>Price Per Card</TableCell>
+                <TableCell>Number Owned</TableCell>
+                <TableCell>Edit / Delete</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
               {this.props.state.cards.userCards.map(card => {
                 return (
-                  <tr key={card.serial_id} onMouseOver={() => this.handleImage(card.image_uris, card.name)}>
-                    <td>{card.name}</td>
-                    <td>{card.set_name}</td>
-                    <td>{card.price}</td>
-                    <td>{card.number_owned}</td>
-                    <td><button value={card.serial_id} onClick={this.handleDelete}>Delete</button></td>
-                  </tr>
+                  <TableRow key={card.serial_id} onMouseOver={() => this.handleImage(card.image_uris, card.name)} >
+                    <UserTable name={card.name} set_name={card.set_name} price={card.price} number_owned={card.number_owned} serial_id={card.serial_id}/>
+                    {/* <TableCell  >{card.name}</TableCell>
+                    <TableCell>{card.set_name}</TableCell>
+                    <TableCell>{card.price}</TableCell>
+                    <TableCell>{this.state.editable ?
+                      <><input placeholder={card.number_owned}></input><button onClick={this.handleEdit}>Save</button></>
+                      :
+                      <>{card.number_owned} <button onClick={this.handleEdit}>Edit</button></>
+                    }
+                    </TableCell>
+                    <TableCell><button value={card.serial_id} onClick={this.handleDelete}>Delete</button></TableCell> */}
+                  </TableRow>
                 )
               })}
-            </tbody>
-          </table>
+            </TableBody>
+          </Table> <br />
+          <h2>Total Value: {this.state.totalValue}</h2>
+          <pre>
+            {JSON.stringify(this.state, null, 2)}
+          </pre>
           <img className="cardImageResults" src={this.state.image} alt={this.state.alt} />
         </div>
       </>
