@@ -37,9 +37,9 @@ class UserTotal extends Component{
         return(
             <>
             Collection total: {newTotal}
-            <pre>
+            {/* <pre>
                 {JSON.stringify(this.props.cardlist, null, 2)}
-            </pre>
+            </pre> */}
             </>
         )
     }

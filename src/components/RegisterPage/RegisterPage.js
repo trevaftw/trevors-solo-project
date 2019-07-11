@@ -40,11 +40,11 @@ class RegisterPage extends Component {
             {this.props.errors.registrationMessage}
           </h2>
         )}
-        <form onSubmit={this.registerUser}>
+        <form onSubmit={this.registerUser} className="loginRegister">
           <h1>Register User</h1>
           <div>
             <label htmlFor="username">
-              Username:
+              Username:<br />
               <input
                 type="text"
                 name="username"
@@ -55,7 +55,7 @@ class RegisterPage extends Component {
           </div>
           <div>
             <label htmlFor="password">
-              Password:
+              Password:<br />
               <input
                 type="password"
                 name="password"

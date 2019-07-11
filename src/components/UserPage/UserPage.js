@@ -4,6 +4,10 @@ import { connect } from 'react-redux';
 import UserTable from './UserTable';
 import UserTotal from './UserTotal';
 
+//Components
+import Nav from '../Nav/Nav';
+import Footer from '../Footer/Footer';
+
 //styling
 import './User.css';
 import TableBody from '@material-ui/core/TableBody';
@@ -49,6 +53,7 @@ class UserPage extends Component {
   render() {
     return (
       <>
+      <Nav />
         <div>
           <h1 id="welcome">
             Welcome {this.props.state.user.username}!
@@ -78,6 +83,7 @@ class UserPage extends Component {
           <UserTotal cardlist={this.props.state.cards.userCards} /><br />
           <img className="cardImageResults" src={this.state.image} alt={this.state.alt} />
         </div>
+        <Footer />
       </>
     );
   }
