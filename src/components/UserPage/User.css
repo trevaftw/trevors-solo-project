@@ -1,20 +1,28 @@
-/* .columnWidth {
-    width: 500px;
-} */
-/* 
-.cardSet{
-    width: 100px;
+th, td {
+    padding: 15px;
+    text-align: center;
+    border: 0;
 }
 
-.cardPrice{
-    width: 100px;
+th:not(.table-number) {
+    width: 280px;
 }
 
-.numberOwned{
-    width: 100px;
+.user-table-row:hover{
+    background-color: #b39b87;
+    box-shadow: 10px 10px 5px grey;
 }
 
-.deleteColumn{
-    width: 100px;
-} */
+table{
+    border-collapse: collapse;
+    box-shadow: 10px 10px 5px grey;
+}
 
+.user-flex{
+    display: flex;
+    justify-content: space-around;
+}
+
+table, td, th {
+    border: 1px solid black;
+  }

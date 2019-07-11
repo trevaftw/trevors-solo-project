@@ -1,6 +1,7 @@
 .cardImageResults{
-    width: 200px;
+    width: 300px;
     height: auto;
+    box-shadow: 10px 10px 5px grey;
 }
 
 .centerColumn {
