@@ -1,5 +1,12 @@
+@font-face {
+    font-family: "JaceBeleren-Bold";
+    src: url("./JaceBeleren-Bold.woff") format("woff"); /* Modern Browsers */
+    font-weight: bold;
+    font-style: bold;
+  }
+
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "JaceBeleren-Bold";
     margin: 0px;
     background-color: #d1c2b6
 }
