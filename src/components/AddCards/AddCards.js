@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+//Components
+import Nav from '../Nav/Nav';
+import Footer from '../Footer/Footer';
+
 //map results
 import SearchResult from '../SearchResult/SearchResult';
 
@@ -89,6 +93,7 @@ class AddCards extends Component {
   render() {
     return (
       <>
+      <Nav />
         <h1>Card Search</h1>
         <br />
         <input placeholder="Type a card name" onChange={this.handleChange} value={this.state.cardName} />
@@ -151,6 +156,7 @@ class AddCards extends Component {
             {JSON.stringify(this.props.reduxState.cards, null, 2)}
           </pre>
         </div>
+        <Footer />
       </>
     );
   }
