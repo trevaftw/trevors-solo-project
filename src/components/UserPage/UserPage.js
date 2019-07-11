@@ -63,7 +63,7 @@ class UserPage extends Component {
                   <th>Card Set</th>
                   <th className="table-number">Price Per Card</th>
                   <th className="table-number">Number Owned</th>
-                  <th>Delete</th>
+                  <th>Edit / Delete</th>
                 </tr>
               </thead>
               <tbody className="userTableBody">

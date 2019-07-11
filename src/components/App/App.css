@@ -60,3 +60,7 @@ input {
 .loginRegister {
     text-align: center;
 }
+
+input[type=number]{
+    width: 40px;
+} 
