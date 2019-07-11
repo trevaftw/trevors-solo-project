@@ -11,3 +11,8 @@ th, td {
 table{
     border-collapse: collapse;
 }
+
+.user-flex{
+    display: flex;
+    
+}
