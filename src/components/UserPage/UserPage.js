@@ -60,26 +60,26 @@ class UserPage extends Component {
           </h1>
           <br />
           <h2>Your current collection:</h2>
-          <Table>
-            <TableHead className="userTableHead">
-              <TableRow>
-                <TableCell style={{ width: 100 }} >Card Name</TableCell>
-                <TableCell style={{ width: 100 }} >Card Set</TableCell>
-                <TableCell style={{ width: 100 }} >Price Per Card</TableCell>
-                <TableCell style={{ width: 100 }} >Number Owned</TableCell>
-                <TableCell style={{ width: 100 }} >Delete</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody className="userTableBody">
+          <table>
+            <thead className="userTableHead">
+              <tr>
+                <th style={{ width: 100 }} >Card Name</th>
+                <th style={{ width: 100 }} >Card Set</th>
+                <th style={{ width: 100 }} >Price Per Card</th>
+                <th style={{ width: 100 }} >Number Owned</th>
+                <th style={{ width: 100 }} >Delete</th>
+              </tr>
+            </thead>
+            <tbody className="userTableBody">
               {this.props.state.cards.userCards.map(card => {
                 return (
-                  <TableRow key={card.serial_id} onMouseOver={() => this.handleImage(card.image_uris, card.name)} >
+                  <tr key={card.serial_id} className="user-table-row" onMouseOver={() => this.handleImage(card.image_uris, card.name)} >
                     <UserTable name={card.name} set_name={card.set_name} price={card.price} number_owned={card.number_owned} serial_id={card.serial_id} />
-                  </TableRow>
+                  </tr>
                 )
               })}
-            </TableBody>
-          </Table> <br />
+            </tbody>
+          </table> <br />
           <UserTotal cardlist={this.props.state.cards.userCards} /><br />
           <img className="cardImageResults" src={this.state.image} alt={this.state.alt} />
         </div>
