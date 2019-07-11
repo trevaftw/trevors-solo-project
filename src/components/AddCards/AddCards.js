@@ -107,50 +107,50 @@ class AddCards extends Component {
             {JSON.stringify(this.state, null, 2)}
           </pre> */}
         <div id="AddCardTable">
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>Card Name</TableCell>
-                <TableCell>Card Set</TableCell>
-                <TableCell>Price Per Card</TableCell>
-                <TableCell>Number to Add?</TableCell>
-                <TableCell></TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
+          <table>
+            <thead>
+              <tr>
+                <th>Card Name</th>
+                <th>Card Set</th>
+                <th>Price Per Card</th>
+                <th>Number to Add?</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
               {this.props.reduxState.cards.cards.map((card) => {
                 if (card.card_faces && card.card_faces[0] && card.card_faces[0].image_uris && card.prices.usd === null) {
                   return (
-                    <TableRow onMouseOver={() => this.handleImage(card.card_faces[0].image_uris.large, card.card_faces[0].name, card.card_faces[0].type_line, card.card_faces[0].oracle_text)} key={card.id}>
+                    <tr onMouseOver={() => this.handleImage(card.card_faces[0].image_uris.large, card.card_faces[0].name, card.card_faces[0].type_line, card.card_faces[0].oracle_text)} key={card.id}>
                       <SearchResult name={card.name} set={card.set_name} price={card.prices.usd_foil} image={card.card_faces[0].image_uris.large} id={card.id} />
-                    </TableRow>
+                    </tr>
                   )
                 } else if (card.card_faces && card.card_faces[0] && card.card_faces[0].image_uris) {
                   return (
-                    <TableRow onMouseOver={() => this.handleImage(card.card_faces[0].image_uris.large, card.card_faces[0].name, card.card_faces[0].type_line, card.card_faces[0].oracle_text)} key={card.id}>
+                    <tr onMouseOver={() => this.handleImage(card.card_faces[0].image_uris.large, card.card_faces[0].name, card.card_faces[0].type_line, card.card_faces[0].oracle_text)} key={card.id}>
                       <SearchResult name={card.name} set={card.set_name} price={card.prices.usd} image={card.card_faces[0].image_uris.large} id={card.id} />
-                    </TableRow>
+                    </tr>
                   )
                 } else if (card.prices.usd === null && card.prices.usd_foil === null) {
                   return null
                 } else if (card.prices.usd === null) {
                   return (
-                    <TableRow onMouseOver={() => this.handleImage(card.image_uris.large, card.name, card.type_line, card.oracle_text)} key={card.id}>
+                    <tr onMouseOver={() => this.handleImage(card.image_uris.large, card.name, card.type_line, card.oracle_text)} key={card.id}>
                       <SearchResult name={card.name} set={card.set_name} price={card.prices.usd_foil} image={card.image_uris.large} id={card.id} />
-                    </TableRow>
+                    </tr>
                   )
                 } else {
                   return (
-                    <TableRow onMouseOver={() => this.handleImage(card.image_uris.large, card.name, card.type_line, card.oracle_text)} key={card.id}>
+                    <tr onMouseOver={() => this.handleImage(card.image_uris.large, card.name, card.type_line, card.oracle_text)} key={card.id}>
                       <SearchResult name={card.name} set={card.set_name} price={card.prices.usd} image={card.image_uris.large} id={card.id} />
-                    </TableRow>
+                    </tr>
                   )
                 }
               }
               )
               }
-            </TableBody>
-          </Table> <img className="cardImageResults" src={this.state.image} alt={this.state.alt} />
+            </tbody>
+          </table> <img className="cardImageResults" src={this.state.image} alt={this.state.alt} />
           <br />
           <pre>
             {JSON.stringify(this.props.reduxState.cards, null, 2)}

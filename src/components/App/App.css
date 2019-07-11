@@ -64,3 +64,36 @@ input {
 input[type=number]{
     width: 40px;
 } 
+
+th, td {
+    padding: 15px;
+    text-align: center;
+    border: 0;
+}
+
+th:not(.table-number) {
+    width: 280px;
+}
+
+.user-table-row:hover{
+    background-color: #b39b87;
+    box-shadow: 10px 10px 5px grey;
+}
+
+table{
+    border-collapse: collapse;
+    box-shadow: 10px 10px 5px grey;
+}
+
+.user-flex{
+    display: flex;
+    justify-content: space-around;
+}
+
+table, td, th {
+    border: 1px solid black;
+  }
+
+tr {
+    height: 70px;
+}
