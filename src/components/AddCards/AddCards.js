@@ -159,7 +159,7 @@ class AddCards extends Component {
             {JSON.stringify(this.props.reduxState.cards, null, 2)}
           </pre> */}
         </div>
-        <Footer />
+         
       </>
     );
   }

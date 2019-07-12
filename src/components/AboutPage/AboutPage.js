@@ -16,7 +16,7 @@ const AboutPage = () => (
         This app will allow a user to search for Magic the Gathering cards to add to their collection to see the daily prices and the total of their collection. 
       </p>
     </div>
-    <Footer />
+     
   </div>
 );
 

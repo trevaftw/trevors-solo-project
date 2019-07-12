@@ -9,7 +9,7 @@ import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 
 //styling
-import './User.css';
+// import './User.css';
 
 const mtgCardBack = require('../AddCards/Magic_the_gathering-card_back.jpg');
 
@@ -57,13 +57,13 @@ class UserPage extends Component {
         <section className="user-flex">
           <div>
             <table>
-              <thead className="userTableHead">
+              <thead>
                 <tr>
-                  <th>Card Name</th>
-                  <th>Card Set</th>
-                  <th className="table-number">Price Per Card</th>
-                  <th className="table-number">Number Owned</th>
-                  <th>Edit / Delete</th>
+                  <th className="head280">Card Name</th>
+                  <th className="head280">Card Set</th>
+                  <th className="head145">Price Per Card</th>
+                  <th className="head145">Number Owned</th>
+                  <th className="head161">Edit / Delete</th>
                 </tr>
               </thead>
               <tbody className="userTableBody">
@@ -81,7 +81,7 @@ class UserPage extends Component {
             <img className="cardImageResults" src={this.state.image} alt={this.state.alt} />
           </div>
         </section>
-        <Footer />
+         
       </>
     );
   }
