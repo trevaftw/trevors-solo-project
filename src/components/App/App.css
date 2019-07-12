@@ -126,6 +126,7 @@ tr, th{
     width: 300px;
     height: auto;
     box-shadow: 10px 10px 5px grey;
+    border-radius: 5%;
 }
 
 /* this positions the table and the image on the DOM next to eachother with even space */

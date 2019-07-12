@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {connect}  from 'react-redux';
+import { connect } from 'react-redux';
 
 class UserTable extends Component {
     state = {
@@ -16,16 +16,20 @@ class UserTable extends Component {
 
     handleSave = (event) => {
         console.log('save')
-        this.setState({
-            editable: !this.state.editable
-        })
-        console.log('this.state.newValue:', this.state.newValue)
-        console.log('event.target.value', event.target.value)
-        const newObject = {
-            card_id: event.target.value,
-            newValue: this.state.newValue
+        if (this.state.newValue <= 0) {
+            alert("ERROR - Quantity must be at least 1")
+        } else {
+            this.setState({
+                editable: !this.state.editable
+            })
+            console.log('this.state.newValue:', this.state.newValue)
+            console.log('event.target.value', event.target.value)
+            const newObject = {
+                card_id: event.target.value,
+                newValue: this.state.newValue
+            }
+            this.props.dispatch({ type: 'UPDATE_NUMBER_OWNED', payload: newObject })
         }
-        this.props.dispatch({type: 'UPDATE_NUMBER_OWNED', payload: newObject})
     }
 
     handleChange = (event) => {
@@ -51,7 +55,7 @@ class UserTable extends Component {
                 <td className="table280"  >{this.props.set_name}</td>
                 <td className="table145"  >{this.props.price}</td>
                 <td className="table145"  >{this.state.editable ?
-                    <><input type="number" onChange={this.handleChange} placeholder={this.props.number_owned}></input><button className="ADE-button"  value={this.props.serial_id} onClick={this.handleSave}>Save</button></>
+                    <><input type="number" min="0" onChange={this.handleChange} placeholder={this.props.number_owned}></input><button className="ADE-button" value={this.props.serial_id} onClick={this.handleSave}>Save</button></>
                     :
                     <>{this.props.number_owned} </>
                 }
@@ -64,7 +68,7 @@ class UserTable extends Component {
 
 const mapStateToProps = state => ({
     state: state,
-  });
-  
-  // this allows us to use <App /> in index.js
-  export default connect(mapStateToProps)(UserTable); 
+});
+
+// this allows us to use <App /> in index.js
+export default connect(mapStateToProps)(UserTable); 
