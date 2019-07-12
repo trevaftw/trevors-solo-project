@@ -58,11 +58,11 @@ class SearchResult extends Component {
     render() {
         return (
             <>
-                    <td>{this.props.name}</td>
-                    <td className="centerColumn">{this.props.set}</td>
-                    <td className="centerColumn">{this.props.price}</td>
-                    <td className="centerColumn"><input type="number" min="0" lang={this.props.image} name={this.props.name} id={this.props.price} title={this.props.set} value={(this.state && this.state.newCards && this.state.newCards.scryfall_id === this.props.id && this.state.newCards.number) || 0} onChange={this.handleNumber(`${this.props.id}`)} /></td>
-                    <td className="centerColumn"><button onClick={this.handleAdd} value={this.props.id} >Add</button></td>
+                    <td className="table280">{this.props.name}</td>
+                    <td className="table280">{this.props.set}</td>
+                    <td className="table145">{this.props.price}</td>
+                    <td className="table145"><input type="number" min="0" lang={this.props.image} name={this.props.name} id={this.props.price} title={this.props.set} value={(this.state && this.state.newCards && this.state.newCards.scryfall_id === this.props.id && this.state.newCards.number) || 0} onChange={this.handleNumber(`${this.props.id}`)} /></td>
+                    <td className="table161"><button onClick={this.handleAdd} value={this.props.id} >Add</button></td>
             </>
         );
     }

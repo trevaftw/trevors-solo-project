@@ -110,11 +110,11 @@ class AddCards extends Component {
           <table>
             <thead>
               <tr>
-                <th>Card Name</th>
-                <th>Card Set</th>
-                <th className="table-number">Price Per Card</th>
-                <th className="table-number">Number In Collection?</th>
-                <th className="table-number">Add</th>
+                <th className="head280">Card Name</th>
+                <th className="head280">Card Set</th>
+                <th className="head145">Price Per Card</th>
+                <th className="head145">Number In Collection?</th>
+                <th className="head161">Add</th>
               </tr>
             </thead>
             <tbody>
