@@ -24,7 +24,9 @@
     "react-window": "^1.8.5",
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
-    "redux-saga": "^1.0.2"
+    "redux-saga": "^1.0.2",
+    "sweetalert2": "^8.13.4",
+    "sweetalert2-react-content": "^1.1.0"
   },
   "scripts": {
     "start": "node server/server.js",

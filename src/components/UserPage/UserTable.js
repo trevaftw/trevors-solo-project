@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+//sweetAlert
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+const MySwal = withReactContent(Swal)
+
 class UserTable extends Component {
     state = {
         editable: false,
@@ -17,7 +22,12 @@ class UserTable extends Component {
     handleSave = (event) => {
         console.log('save')
         if (this.state.newValue <= 0) {
-            alert("ERROR - Quantity must be at least 1")
+            MySwal.fire({
+                title: 'Uh-Oh',
+                text: 'Quantity must be at least 1',
+                type: 'error',
+                confirmButtonText: 'Sorry'
+            })
         } else {
             this.setState({
                 editable: !this.state.editable
@@ -40,12 +50,26 @@ class UserTable extends Component {
     }
 
     handleDelete = (event) => {
+        event.persist();
         console.log('event.target.value', event.target.value)
-        // console.log('event.target.id', event.target.id)
-        const confirmBox = window.confirm('Click to OK to delete. Click Cancel to keep watching the card');
-        if (confirmBox === true) {
-            this.props.dispatch({ type: 'DELETE_CARD', payload: event.target.value })
-        }
+        console.log('event.target.id', event.target.id)
+        // const confirmBox = window.confirm('Click to OK to delete. Click Cancel to keep watching the card');
+        MySwal.fire({
+            title: 'WARNING',
+            text: `Are you sure you want to remove ${event.target.id} from your collection?`,
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.value) {
+                this.props.dispatch({ type: 'DELETE_CARD', payload: event.target.value })
+                console.log('true')
+            }
+        })
+        // if (confirmBox === true) {
+        //     
     }
 
     render() {
@@ -60,7 +84,7 @@ class UserTable extends Component {
                     <>{this.props.number_owned} </>
                 }
                 </td>
-                <td className="table145" ><button className="ADE-button" onClick={this.handleEdit}>Edit</button><button className="ADE-button" value={this.props.serial_id} onClick={this.handleDelete}>Delete</button></td>
+                <td className="table145" ><button className="ADE-button" onClick={this.handleEdit}>Edit</button><button className="ADE-button" id={this.props.name + ' from ' + this.props.set_name} value={this.props.serial_id} onClick={this.handleDelete}>Delete</button></td>
             </>
         )
     }

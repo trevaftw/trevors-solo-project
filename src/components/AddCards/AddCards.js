@@ -7,6 +7,11 @@ import Nav from '../Nav/Nav';
 //map results
 import SearchResult from '../SearchResult/SearchResult';
 
+//sweetAlert
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+const MySwal = withReactContent(Swal)
+
 const mtgCardBack = require('./Magic_the_gathering-card_back.jpg');
 
 class AddCards extends Component {
@@ -27,7 +32,12 @@ class AddCards extends Component {
     const card = this.state.cardName
     console.log('this.state.cardName:', card)
     if (card.length < 3) {
-      alert('Search must be at least 3 characters')
+      MySwal.fire({
+        title: 'Uh-Oh',
+        text: 'Search must be at least 3 characters',
+        type: 'error',
+        confirmButtonText: 'Sorry'
+      })
     } else {
       this.setState({
         cardName: ''
@@ -63,32 +73,15 @@ class AddCards extends Component {
     })
   }
 
-  handleAdd = (event) => {
-    // console.log('event.target.value:', event.target.value)
-    if (this.state.newCards === null) {
-      alert('Please select a number')
-    } else if (this.state.newCards.scryfall_id === event.target.value) {
-      const newCardObject = this.state.newCards
-      console.log('card to be added:', newCardObject)
-      this.props.dispatch({ type: 'ADD_TO_COLLECTION', payload: newCardObject })
-      this.setState({
-        newCards: null
-      })
-      event.target.value = 0
-    } else {
-      alert(`Please add the ${this.state.newCards.name} from ${this.state.newCards.card_set} first before adding other cards`)
-    }
-  }
-
   render() {
     return (
       <>
         <Nav />
         <center>
-        <h1>Card Search</h1>
-        <br />
-        <input placeholder="Type a card name" onChange={this.handleChange} value={this.state.cardName} />
-        <button className="ADE-button" onClick={this.handleClick}>Search</button><br />
+          <h1>Card Search</h1>
+          <br />
+          <input placeholder="Type a card name" onChange={this.handleChange} value={this.state.cardName} />
+          <button className="ADE-button" onClick={this.handleClick}>Search</button><br />
         </center><br />
         {this.props.reduxState.cards.length >= 100 &&
           <h3>Search returned over 100 results. Please narrow search.</h3>}
@@ -100,7 +93,7 @@ class AddCards extends Component {
         <div id="add-card-flex">
           <table>
             <thead>
-            <h2>Search Results:</h2>
+              <h2>Search Results:</h2>
             </thead>
             <thead>
               <tr>
@@ -153,7 +146,7 @@ class AddCards extends Component {
             {JSON.stringify(this.props.reduxState.cards, null, 2)}
           </pre> */}
         </div>
-         
+
       </>
     );
   }
