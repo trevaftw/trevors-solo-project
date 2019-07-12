@@ -8,10 +8,6 @@ import {
 
 import {connect} from 'react-redux';
 
-//Components
-import Nav from '../Nav/Nav';
-import Footer from '../Footer/Footer';
-
 //user has to be logged in to see the route
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 

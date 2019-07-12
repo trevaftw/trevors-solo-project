@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import TableCell from '@material-ui/core/TableCell'
 
 class SearchResult extends Component {
 
@@ -62,7 +61,7 @@ class SearchResult extends Component {
                     <td className="table280">{this.props.set}</td>
                     <td className="table145">{this.props.price}</td>
                     <td className="table145"><input type="number" min="0" lang={this.props.image} name={this.props.name} id={this.props.price} title={this.props.set} value={(this.state && this.state.newCards && this.state.newCards.scryfall_id === this.props.id && this.state.newCards.number) || 0} onChange={this.handleNumber(`${this.props.id}`)} /></td>
-                    <td className="table161"><button onClick={this.handleAdd} value={this.props.id} >Add</button></td>
+                    <td className="table161"><button className="ADE-button"  onClick={this.handleAdd} value={this.props.id} >Add</button></td>
             </>
         );
     }

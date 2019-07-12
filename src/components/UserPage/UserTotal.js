@@ -26,17 +26,18 @@ class UserTotal extends Component{
 
     render(){
         let newTotal = 0;
+        let fixedNewTotal = 0;
         console.log('this.props.cardList', this.props.cardlist)
         this.props.cardlist.forEach((card) => {
           console.log('card:', card)
           newTotal = Number(newTotal) + (Number(card.number_owned) * Number(card.price))
-          console.log('newTotal:', newTotal)
-          return Number(newTotal)
+          fixedNewTotal = Number(newTotal.toFixed(2))
+          return Number(fixedNewTotal)
         }
         )
         return(
             <>
-            Collection total: {newTotal}
+            <h2>Your current collection is worth: {(fixedNewTotal)}</h2>
             {/* <pre>
                 {JSON.stringify(this.props.cardlist, null, 2)}
             </pre> */}

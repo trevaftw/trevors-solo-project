@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import {connect}  from 'react-redux';
 
-//styling
-import TableCell from '@material-ui/core/TableCell'
-
-
 class UserTable extends Component {
     state = {
         editable: false,
@@ -55,12 +51,12 @@ class UserTable extends Component {
                 <td className="table280"  >{this.props.set_name}</td>
                 <td className="table145"  >{this.props.price}</td>
                 <td className="table145"  >{this.state.editable ?
-                    <><input type="number" onChange={this.handleChange} placeholder={this.props.number_owned}></input><button value={this.props.serial_id} onClick={this.handleSave}>Save</button></>
+                    <><input type="number" onChange={this.handleChange} placeholder={this.props.number_owned}></input><button className="ADE-button"  value={this.props.serial_id} onClick={this.handleSave}>Save</button></>
                     :
                     <>{this.props.number_owned} </>
                 }
                 </td>
-                <td className="table145" ><button onClick={this.handleEdit}>Edit</button><button value={this.props.serial_id} onClick={this.handleDelete}>Delete</button></td>
+                <td className="table145" ><button className="ADE-button" onClick={this.handleEdit}>Edit</button><button className="ADE-button" value={this.props.serial_id} onClick={this.handleDelete}>Delete</button></td>
             </>
         )
     }

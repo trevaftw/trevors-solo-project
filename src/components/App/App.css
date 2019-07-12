@@ -41,7 +41,17 @@ input {
   cursor: pointer;
 }
 
-.log-in:hover, .log-out:hover, .register:hover {
+.ADE-button {
+    background-color: #b6c5d1;
+    border-radius: 4px;
+    color: #f8f8f8;
+    min-height: 25px;
+    min-width: 50px;
+    outline:0;
+    cursor: pointer;
+  }
+
+.log-in:hover, .log-out:hover, .register:hover, .ADE-button:hover {
   background-color: #87a0b3;
 }
 
@@ -91,14 +101,13 @@ tbody, thead tr {
     border-spacing: 0;
     border-collapse: collapse;
 }
-
-table, tr{
+table, tbody tr, thead{
     border: 1px solid black;
 }
 
 
 /* this section targets three or more elements */
-tr, thead, th{
+tr, th{
     height: 70px;
 }
 
@@ -107,13 +116,16 @@ tr, thead, th{
 .table280, .head280{
     width: 280px;
 }
-
 .table145, .head145{
     width: 145px;
 }
-
 .table161, .head161{
     width: 161px;
+}
+.cardImageResults{
+    width: 300px;
+    height: auto;
+    box-shadow: 10px 10px 5px grey;
 }
 
 /* this positions the table and the image on the DOM next to eachother with even space */

@@ -3,19 +3,9 @@ import { connect } from 'react-redux';
 
 //Components
 import Nav from '../Nav/Nav';
-import Footer from '../Footer/Footer';
 
 //map results
 import SearchResult from '../SearchResult/SearchResult';
-
-//styling
-import './AddCards.css';
-import TableBody from '@material-ui/core/TableBody';
-import Table from '@material-ui/core/Table';
-import TableHead from '@material-ui/core/TableHead';
-import TableCell from '@material-ui/core/TableCell'
-import TableRow from '@material-ui/core/TableRow'
-
 
 const mtgCardBack = require('./Magic_the_gathering-card_back.jpg');
 
@@ -94,11 +84,12 @@ class AddCards extends Component {
     return (
       <>
         <Nav />
+        <center>
         <h1>Card Search</h1>
         <br />
         <input placeholder="Type a card name" onChange={this.handleChange} value={this.state.cardName} />
-        <button onClick={this.handleClick}>Search</button><br />
-        <h2>Search Results:</h2>
+        <button className="ADE-button" onClick={this.handleClick}>Search</button><br />
+        </center><br />
         {this.props.reduxState.cards.length >= 100 &&
           <h3>Search returned over 100 results. Please narrow search.</h3>}
         {this.props.reduxState.cards === [] &&
@@ -108,6 +99,9 @@ class AddCards extends Component {
           </pre> */}
         <div id="add-card-flex">
           <table>
+            <thead>
+            <h2>Search Results:</h2>
+            </thead>
             <thead>
               <tr>
                 <th className="head280">Card Name</th>

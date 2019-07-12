@@ -6,7 +6,6 @@ import UserTotal from './UserTotal';
 
 //Components
 import Nav from '../Nav/Nav';
-import Footer from '../Footer/Footer';
 
 //styling
 // import './User.css';
@@ -48,12 +47,13 @@ class UserPage extends Component {
   render() {
     return (
       <>
-        <Nav />
-        <h1 id="welcome">
-          Welcome {this.props.state.user.username}!
-          </h1>
+        <Nav /><br />
+        <center>
+        <h1 id="welcome">Welcome {this.props.state.user.username}!</h1>
         <br />
         <UserTotal cardlist={this.props.state.cards.userCards} /><br />
+        </center>
+        <br /><br />
         <section className="user-flex">
           <div>
             <table>
