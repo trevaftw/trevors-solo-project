@@ -34,7 +34,7 @@ input {
 .log-in, .log-out, .register {
   background-color: #b6c5d1;
   border-radius: 4px;
-  color: #f8f8f8;
+  color: black;
   min-height: 50px;
   min-width: 100px;
   outline:0;
@@ -44,7 +44,7 @@ input {
 .ADE-button {
     background-color: #b6c5d1;
     border-radius: 4px;
-    color: #f8f8f8;
+    color: black;
     min-height: 25px;
     min-width: 50px;
     outline:0;
