@@ -7,8 +7,6 @@ import { connect } from 'react-redux';
 //Components
 import Nav from '../Nav/Nav';
 
-//memes
-const image = require('./stonks.jpg');
 
 class AboutPage extends Component {
   render() {
@@ -26,8 +24,6 @@ class AboutPage extends Component {
             {this.props.state && this.props.state.user && this.props.state.user.id &&
               <li><Link to={`/collection/${this.props.state.user.id}`}>Send your friends this link to show them your collection!</Link></li>}
           </ul>
-          <br /><br />
-          <img src={image} style={{ width: 200, height: 100 }} alt="stonks meme"></img>
         </div>
         {/* <pre>
           {JSON.stringify(this.props.state, null, 2)}
