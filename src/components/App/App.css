@@ -11,6 +11,10 @@ body {
     background-color: #d1c2b6
 }
 
+li{
+    padding: 10px;
+}
+
 .alert {
     background-color: #ff4545;
     margin: 50px;

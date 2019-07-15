@@ -33,8 +33,8 @@ class Collection extends Component {
         return (
             <>
             <Nav />
-                {this.props.state.cards && this.props.state.cards.shareCards && this.props.state.cards.shareCards[0] && this.props.state.cards.shareCards[0].username &&
-                    <h1>{this.props.state.cards.shareCards[0].username}'s collection:</h1>}
+                <center>{this.props.state.cards && this.props.state.cards.shareCards && this.props.state.cards.shareCards[0] && this.props.state.cards.shareCards[0].username &&
+                    <h1>{this.props.state.cards.shareCards[0].username}'s collection:</h1>}</center>
                 <br />
                 <section className="user-flex">
                     <table>
