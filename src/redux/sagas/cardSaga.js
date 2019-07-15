@@ -98,12 +98,31 @@ function* updateNumberOwned(action) {
   }
 }
 
+function* shareCards(action) {
+  // yield console.log('action.payload', action.payload)
+  try {
+    // const config = {
+    //   headers: { 'Content-Type': 'application/json' },
+    //   withCredentials: true,
+    // }
+    yield put ({type: 'EMPTY_SHARE_CARDS'})
+    const response = yield axios.get(`/api/cards/collection/${action.payload}`);
+    yield console.log('shareCards response:', response.data)
+    // yield console.log('action.payload', action.payload)
+    yield put({type: 'SHARE_CARDS_REDUCER', payload: response.data})
+
+  } catch (error) {
+    console.log('shareCards generator function error', error);
+  }
+}
+
 function* cardSaga() {
   yield takeLatest('CARD_SEARCH_RESULTS', cardSearchResults);
   yield takeLatest('ADD_TO_COLLECTION', addToColletion);
   yield takeLatest('USER_OWNED_CARDS', userOwnedCards);
   yield takeLatest('DELETE_CARD', deleteCard)
   yield takeLatest('UPDATE_NUMBER_OWNED', updateNumberOwned)
+  yield takeLatest('SHARE_CARDS', shareCards)
 }
 
 export default cardSaga;

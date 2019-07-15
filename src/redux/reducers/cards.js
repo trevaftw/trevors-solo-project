@@ -18,9 +18,21 @@ const userCards = (state = [], action) => {
   }
 }
 
+const shareCards = (state = [], action) => {
+  switch (action.type) {
+    case 'SHARE_CARDS_REDUCER':
+      return action.payload;
+    case 'EMPTY_SHARE_CARDS':
+      return [];
+    default:
+      return state;
+  }
+}
+
 
 export default combineReducers({
   cards,
   userCards,
+  shareCards
 });
 

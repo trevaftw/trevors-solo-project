@@ -15,6 +15,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import AddCards from '../AddCards/AddCards';
+import Collection from '../Collection/Collection';
 
 import './App.css';
 
@@ -55,6 +56,10 @@ class App extends Component {
               component={AddCards}
             />
             {/* If none of the other routes matched, we will show a 404. */}
+            <Route
+            path="/collection/:id"
+            component={Collection}
+            />
             <Route render={() => <h1>404</h1>} />
           </Switch>
         </div>
