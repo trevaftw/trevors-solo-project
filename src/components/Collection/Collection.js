@@ -14,14 +14,14 @@ class Collection extends Component {
     render() {
         return (
             <>
-                Hello<br />
-
+                {this.props.state.cards && this.props.state.cards.shareCards && this.props.state.cards.shareCards[0] && this.props.state.cards.shareCards[0].username &&
+                <h1>{this.props.state.cards.shareCards[0].username}'s collection:</h1>}
                 {/* <pre>
                     {JSON.stringify(this.props.match.params.id, null, 2)}
-                </pre><br />
+                </pre><br /> */}
                 <pre>
-                    {JSON.stringify(this.props, null, 2)}
-                </pre> */}
+                    {JSON.stringify(this.props.state.cards.shareCards, null, 2)}
+                </pre>
             </>
         )
     }
