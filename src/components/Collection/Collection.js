@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import Nav from '../Nav/Nav';
 
 const mtgCardBack = require('../AddCards/Magic_the_gathering-card_back.jpg');
 
@@ -32,6 +32,7 @@ class Collection extends Component {
     render() {
         return (
             <>
+            <Nav />
                 {this.props.state.cards && this.props.state.cards.shareCards && this.props.state.cards.shareCards[0] && this.props.state.cards.shareCards[0].username &&
                     <h1>{this.props.state.cards.shareCards[0].username}'s collection:</h1>}
                 <br />
