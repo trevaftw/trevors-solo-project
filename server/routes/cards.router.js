@@ -16,11 +16,11 @@ router.get('/search/:id', rejectUnauthenticated, (req, res) => {
 //shareable link
 router.get('/collection/:id', (req, res) => {
     console.log('collection router hit');
-    pool.query(`SELECT "user"."username", "name", "set_name", "price", "user_cards"."number_owned"  FROM "cards" 
+    pool.query(`SELECT "user"."username", "name", "set_name", "price", "user_cards"."number_owned", "image_uris", "cards"."id" FROM "cards" 
     JOIN "user_cards" on "cards"."serial_id"="user_cards"."cards_id"
     JOIN "user" on "user"."id"="user_cards"."user_id"
     WHERE "user_cards"."user_id"=$1
-    ORDER BY "cards"."name";`, [req.params.id])
+    ORDER BY "cards"."name"`, [req.params.id])
         .then(response => {
             console.log('response.rows:', response.rows)
             res.send(response.rows)
