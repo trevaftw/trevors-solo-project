@@ -13,14 +13,14 @@ class UserTable extends Component {
     }
 
     handleEdit = () => {
-        console.log('edit')
+        //console.log('edit')
         this.setState({
             editable: !this.state.editable
         })
     }
 
     handleSave = (event) => {
-        console.log('save')
+        //console.log('save')
         if (this.state.newValue <= 0) {
             MySwal.fire({
                 title: 'Uh-Oh',
@@ -32,8 +32,8 @@ class UserTable extends Component {
             this.setState({
                 editable: !this.state.editable
             })
-            console.log('this.state.newValue:', this.state.newValue)
-            console.log('event.target.value', event.target.value)
+            //console.log('this.state.newValue:', this.state.newValue)
+            //console.log('event.target.value', event.target.value)
             const newObject = {
                 card_id: event.target.value,
                 newValue: this.state.newValue
@@ -51,8 +51,8 @@ class UserTable extends Component {
 
     handleDelete = (event) => {
         event.persist();
-        console.log('event.target.value', event.target.value)
-        console.log('event.target.id', event.target.id)
+        //console.log('event.target.value', event.target.value)
+        //console.log('event.target.id', event.target.id)
         // const confirmBox = window.confirm('Click to OK to delete. Click Cancel to keep watching the card');
         MySwal.fire({
             title: 'WARNING',
@@ -65,7 +65,7 @@ class UserTable extends Component {
         }).then((result) => {
             if (result.value) {
                 this.props.dispatch({ type: 'DELETE_CARD', payload: event.target.value })
-                console.log('true')
+                //console.log('true')
             }
         })
         // if (confirmBox === true) {
@@ -77,7 +77,7 @@ class UserTable extends Component {
             <>
                 <td className="table280"  >{this.props.name}</td>
                 <td className="table280"  >{this.props.set_name}</td>
-                <td className="table145"  >{this.props.price}</td>
+                <td className="table145"  >${this.props.price}</td>
                 <td className="table145"  >{this.state.editable ?
                     <><input type="number" min="0" onChange={this.handleChange} placeholder={this.props.number_owned}></input><button className="ADE-button" value={this.props.serial_id} onClick={this.handleSave}>Save</button></>
                     :

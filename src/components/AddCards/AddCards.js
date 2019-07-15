@@ -30,7 +30,7 @@ class AddCards extends Component {
 
   handleClick = () => {
     const card = this.state.cardName
-    console.log('this.state.cardName:', card)
+    //console.log('this.state.cardName:', card)
     if (card.length < 3) {
       MySwal.fire({
         title: 'Uh-Oh',
@@ -47,19 +47,19 @@ class AddCards extends Component {
   }
 
   handleImage = (newImage, name, type_line, oracle_text) => {
-    // console.log('mouse over')
+    // //console.log('mouse over')
     this.setState({
       ...this.state,
       image: newImage,
       alt: `Name:, ${name}, Type:, ${type_line}, Oracle text:, ${oracle_text}`
     })
-    // console.log('this.state.image:', this.state.image)
+    // //console.log('this.state.image:', this.state.image)
   }
 
   handleNumber = (scryfall_id) => (event) => {
-    // console.log('event.target.value:', event.target.value)
-    // console.log('event.target.title:', event.target.title)
-    // console.log('event.target.lang:', event.target.lang)
+    // //console.log('event.target.value:', event.target.value)
+    // //console.log('event.target.title:', event.target.title)
+    // //console.log('event.target.lang:', event.target.lang)
     this.setState({
       newCards: {
         name: event.target.name,

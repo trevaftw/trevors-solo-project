@@ -8,19 +8,19 @@ function* cardSearchResults(action) {
       headers: { 'Content-Type': 'application/json' },
       withCredentials: true,
     };
-    console.log('action.payload:', action.payload)
+    //console.log('action.payload:', action.payload)
     // the config includes credentials which
     // allow the server session to recognize the user
     // If a user is logged in, this will return their information
     // from the server session (req.user)
     const cardSearchResponse = yield axios.get(`/api/cards/search/${action.payload}`, config);
-    console.log('cardSearchResponse.data:', cardSearchResponse.data)
+    //console.log('cardSearchResponse.data:', cardSearchResponse.data)
     // now that the session has given us a user object
     // with an id and username set the client-side user object to let
     // the client-side code know the user is logged in
     yield put({ type: 'CARD_SEARCH_REDUCER', payload: cardSearchResponse.data });
   } catch (error) {
-    console.log('Card Search get request failed', error);
+    //console.log('Card Search get request failed', error);
   }
 }
 function* addToColletion(action) {
@@ -29,25 +29,25 @@ function* addToColletion(action) {
       headers: { 'Content-Type': 'application/json' },
       withCredentials: true,
     };
-    console.log('add To Collection action.payload:', action.payload);
+    //console.log('add To Collection action.payload:', action.payload);
     // const getResponse = yield axios.get(`api/cards/getSingle/${action.payload.scryfall_id}`, config)
-    // console.log('getResponse:', getResponse.data)
+    // //console.log('getResponse:', getResponse.data)
     // yield (getResponse, action) => {
     //   if (getResponse && getResponse.data && getResponse.id && (getResponse.id === action.payload.scryfall_id)) {
     //     return axios.put('/api/cards/updateSingleCard', (config, action.payload))
     //   } else {
     //     return axios.put('/api/cards/updateCardDatabase', (config, action.payload)).then(response => {
-    //       // console.log('saga response.data.serial_id:', response.data.serial_id)
+    //       // //console.log('saga response.data.serial_id:', response.data.serial_id)
     //       axios.post(`/api/cards/updateUserTable/${response.data.serial_id}`, (config, action.payload))
     //     })
     //     // (response.data.serial_id, action.payload), config,  
     //   }
     // }
     const response = yield axios.put('/api/cards/updateCardDatabase', (config, action.payload))
-    // console.log('saga response.data.serial_id:', response.data.serial_id)
+    // //console.log('saga response.data.serial_id:', response.data.serial_id)
     yield axios.post(`/api/cards/updateUserTable/${response.data.serial_id}`, (config, action.payload))
   } catch (error) {
-    console.log('Card Search get request failed', error);
+    //console.log('Card Search get request failed', error);
   }
 }
 
@@ -57,13 +57,13 @@ function* userOwnedCards(action) {
       headers: { 'Content-Type': 'application/json' },
       withCredentials: true,
     };
-    // console.log('USER_OWNED_CARDS saga hit')
-    // console.log('action.payload:', action.payload)
+    // //console.log('USER_OWNED_CARDS saga hit')
+    // //console.log('action.payload:', action.payload)
     const response = yield axios.get(`api/cards/getUserCards/${action.payload}`, config);
-    console.log('axios userownedcards get response:', response.data);
+    //console.log('axios userownedcards get response:', response.data);
     yield put({ type: 'SINGLE_USER_REDUCER', payload: response.data })
   } catch (error) {
-    console.log('USER_OWNED_CARDS saga error', error);
+    //console.log('USER_OWNED_CARDS saga error', error);
   }
 }
 
@@ -73,12 +73,12 @@ function* deleteCard(action) {
       headers: { 'Content-Type': 'application/json' },
       withCredentials: true,
     }
-    console.log('delete card saga hit. actino.payload:', action.payload)
+    //console.log('delete card saga hit. actino.payload:', action.payload)
     const response = yield axios.delete(`/api/cards/delete/${action.payload}`, config)
-    console.log('response', response.data[0].user_id)
+    //console.log('response', response.data[0].user_id)
     yield put({ type: 'USER_OWNED_CARDS', payload: response.data[0].user_id })
   } catch (error) {
-    console.log('DELETE_CARD saga error', error);
+    //console.log('DELETE_CARD saga error', error);
   }
 }
 
@@ -88,13 +88,13 @@ function* updateNumberOwned(action) {
       headers: { 'Content-Type': 'application/json' },
       withCredentials: true,
     }
-    console.log('UPDATE_NUMBER_OWNED SAGA HIT. action.payload:', action.payload)
+    //console.log('UPDATE_NUMBER_OWNED SAGA HIT. action.payload:', action.payload)
     const response = yield axios.put(`api/cards/updateNumberOwned/${action.payload.card_id}`, (config, action.payload));
-    console.log('updaqte number owned axios response:', response.data.user_id)
+    //console.log('updaqte number owned axios response:', response.data.user_id)
     yield put({ type: 'USER_OWNED_CARDS', payload: response.data.user_id })
 
   } catch (error) {
-    console.log('UPDATE_NUMBER_OWNED saga error', error);
+    //console.log('UPDATE_NUMBER_OWNED saga error', error);
   }
 }
 

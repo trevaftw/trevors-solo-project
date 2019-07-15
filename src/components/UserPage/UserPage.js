@@ -21,7 +21,7 @@ class UserPage extends Component {
 
   componentDidMount() {
     this.handleFetchCards();
-    // console.log('handleFetchCards')
+    // //console.log('handleFetchCards')
   }
 
   handleFetchCards = () => {
@@ -31,13 +31,13 @@ class UserPage extends Component {
 
 
   handleImage = (newImage, name) => {
-    // console.log('mouse over')
+    // //console.log('mouse over')
     this.setState({
       ...this.state,
       image: newImage,
       alt: `Name:, ${name}`,
     })
-    // console.log('this.state.image:', this.state.image)
+    // //console.log('this.state.image:', this.state.image)
   }
 
 
