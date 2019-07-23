@@ -68,7 +68,7 @@ router.get('/getUserCards/:id', rejectUnauthenticated, (req, res) => {
     SELECT * FROM "user_cards" 
     JOIN "cards" on "cards"."serial_id"="user_cards"."cards_id"
     WHERE "user_cards"."user_id"=$1
-    ORDER BY "cards"."name";`, [req.params.id]
+    ORDER BY "cards"."name", "cards"."set_name";`, [req.params.id]
     ).then((response) => {
         //console.log('/getUserCards/:id response.rows:', response.rows)
         //console.log('req.user:', req.user)
